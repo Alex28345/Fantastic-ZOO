@@ -38,9 +38,19 @@ public class FantasticZooMaster {
         return display;
     }
 
+    public void cleanEnclosure(/*Enclosure enclosure*/){
+        /*enclosure.clean();*/
+        isClean = true;
+    }
+
     public void feedCreaturesInEnclosure(/*Enclosure enclosure*/){
         /*enclosure.feedCreatures();*/
         areFeeded = true;
+    }
+
+    public void transferCreatureBetweenEnclosures(/*Enclosure departureEnclosure, Creature creature, arrivalEnclosure*/){
+        /*arrivalEnclosure.addCreatures(creature);
+        * departureEnclosure.remove(creature);*/
     }
 
 }
