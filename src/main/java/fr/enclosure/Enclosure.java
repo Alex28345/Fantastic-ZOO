@@ -34,4 +34,5 @@ public class Enclosure {
      public void clean(){
         this.cleanliness = true;
      }
+
 }

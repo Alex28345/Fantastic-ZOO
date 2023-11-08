@@ -20,6 +20,4 @@ public class Aquarium extends Enclosure{
     public void checkSalinity(){
         //vide
     }
-
-
 }
