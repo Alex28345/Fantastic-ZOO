@@ -14,5 +14,4 @@ public class Aviary extends Enclosure{
     public void checkRoof(){
         //vide
     }
-
 }
