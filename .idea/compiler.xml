@@ -9,5 +9,8 @@
         <module name="Fantasic-ZOO" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Fantasic-ZOO" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
