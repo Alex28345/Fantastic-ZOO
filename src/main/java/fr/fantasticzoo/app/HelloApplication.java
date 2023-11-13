@@ -1,4 +1,4 @@
-package fr.fantasticzoo;
+package fr.fantasticzoo.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
