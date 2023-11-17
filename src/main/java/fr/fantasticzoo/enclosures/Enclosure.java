@@ -1,6 +1,6 @@
 package fr.fantasticzoo.enclosures;
 
-import fr.fantasticzoo.creatures.Creature;
+import fr.fantasticzoo.creatures.abstractClasses.Creature;
 
 import java.util.ArrayList;
 
