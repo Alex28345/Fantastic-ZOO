@@ -1,17 +1,12 @@
 package fr.fantasticzoo.creatures;
 
+import fr.fantasticzoo.creatures.abstractClasses.Viviparous;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Runner;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Viviparous;
 
-public class Unicorn extends Creature implements Runner, Viviparous {
+public class Unicorn extends Viviparous implements Runner {
     @Override
     public void run() {
 
     }
 
-    @Override
-    public void giveBirth() {
-
-    }
-    // Implement the methods
 }
