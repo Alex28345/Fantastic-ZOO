@@ -2,7 +2,7 @@ package fr.fantasticzoo.creatures;
 
 import fr.fantasticzoo.creatures.propertiesInterfaces.*;
 
-public class Dragon extends Creature implements Runner, Swimmer, Flyer, Oviparous, Immortal {
+public class Dragon extends Oviparous implements Runner, Swimmer, Flyer, Immortal {
     @Override
     public void fly() {
 

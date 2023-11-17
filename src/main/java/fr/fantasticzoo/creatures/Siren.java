@@ -1,9 +1,8 @@
 package fr.fantasticzoo.creatures;
 
 import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Viviparous;
 
-public class Siren extends Creature implements Swimmer, Viviparous {
+public class Siren extends Viviparous implements Swimmer {
     @Override
     public void swim() {
     }
