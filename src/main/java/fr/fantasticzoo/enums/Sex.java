@@ -1,4 +1,4 @@
-package fr.fantasticzoo.creatures.enums;
+package fr.fantasticzoo.enums;
 
 public enum Sex {
         male, female

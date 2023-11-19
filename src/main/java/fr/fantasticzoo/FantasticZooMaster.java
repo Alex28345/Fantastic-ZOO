@@ -1,14 +1,21 @@
 package fr.fantasticzoo;
 
+import fr.fantasticzoo.enums.Age;
+import fr.fantasticzoo.enums.Sex;
+
 public class FantasticZooMaster {
     private String name;
-    private String gender;
-    private int age;
+    private Sex sex;
+    private Age age;
 
     private boolean isClean = false;
     private boolean areFeeded = false;
 
+    public FantasticZooMaster(String name, Sex sex){
+        this.name = name;
+        this.sex = sex;
 
+    }
     public String getName() {
         return name;
     }
@@ -17,19 +24,19 @@ public class FantasticZooMaster {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
+    public Sex getSex() {
+        return this.sex;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
-    public int getAge() {
+    public Age getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Age age) {
         this.age = age;
     }
 

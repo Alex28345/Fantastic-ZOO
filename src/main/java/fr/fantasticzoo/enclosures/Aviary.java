@@ -8,8 +8,8 @@ public class Aviary extends Enclosure{
     private int height;
 
 
-    public Aviary(String name, int surface, int capacity, int creatureCount, ArrayList<Creature> creatures, boolean cleanliness, int height) {
-        super(name, surface, capacity, creatureCount, creatures, cleanliness);
+    public Aviary(String name, int surface, int capacity, int height) {
+        super(name, surface, capacity);
         this.height = height;
     }
 

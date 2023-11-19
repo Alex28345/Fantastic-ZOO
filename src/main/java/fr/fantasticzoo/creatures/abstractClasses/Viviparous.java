@@ -1,6 +1,6 @@
 package fr.fantasticzoo.creatures.abstractClasses;
 
-import fr.fantasticzoo.creatures.enums.Sex;
+import fr.fantasticzoo.enums.Sex;
 
 public abstract class Viviparous extends Creature{
     public void giveBirth(){

@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 public class Dragon extends Oviparous implements Runner, Swimmer, Flyer, Immortal {
     public Dragon(String name) {
         this.name = name;
-        System.out.printf("I'm a dragon, my name is %s%n", name);
     }
 
     @Override

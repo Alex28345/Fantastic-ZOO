@@ -10,7 +10,7 @@ public class Aquarium extends Enclosure{
 
 
     public Aquarium(String name, int surface, int capacity, int creatureCount, ArrayList<Creature> creatures, boolean cleanliness, int depth, boolean salinity) {
-        super(name, surface, capacity, creatureCount, creatures, cleanliness);
+        super(name, surface, capacity);
         this.depth = depth;
         this.salinity = false;
     }

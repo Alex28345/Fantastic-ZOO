@@ -1,8 +1,8 @@
 package fr.fantasticzoo.creatures.abstractClasses;
 
 
-import fr.fantasticzoo.creatures.enums.Sex;
-import fr.fantasticzoo.creatures.enums.Age;
+import fr.fantasticzoo.enums.Sex;
+import fr.fantasticzoo.enums.Age;
 import javafx.scene.control.Button;
 
 public abstract class Creature {
