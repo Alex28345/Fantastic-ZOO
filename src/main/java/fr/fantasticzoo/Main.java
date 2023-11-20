@@ -17,6 +17,7 @@ public class Main {
 
         zoo.addEnclosure(enclosure);
 
+        System.out.println("\u001B[31mLa créature est déjà dans l'enclos\u001B[0m");
 
 
     }

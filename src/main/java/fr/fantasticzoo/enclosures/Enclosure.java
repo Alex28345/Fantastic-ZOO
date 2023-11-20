@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Enclosure {
     final private String NAME; //nom de l'enclos
-    private String CREATURE_TYPE; //type de créature de l'enclos
+    private String CREATURE_TYPE; //type de créature de l'enclos (le nom des créatures de l'enclos)
     final private int surface; //surface en m²
     private int capacity; //nombre de créatures max
     private int creatureCount; //nombre de créatures
@@ -40,10 +40,10 @@ public class Enclosure {
                          creatureCount++;
                          return;
                      }
-                     throw new IllegalArgumentException("\u001B[31mLa créature est déjà dans l'enclos\u001B[0m");
+                     System.out.println("\u001B[31mLa créature est déjà dans l'enclos\u001B[0m");
                  }
              }
-             throw new IllegalArgumentException("\u001B[31mL'enclos est plein\u001B[0m");
+             System.out.println("\u001B[31mL'enclos est plein\u001B[0m");
          }else
              System.out.println("\u001B[31mLa créature n'est pas du bon type\u001B[0m");
      }
@@ -54,7 +54,15 @@ public class Enclosure {
         this.creatures.get(this.creatures.indexOf(creature)).feed();
      }
      public void clean(){
-        this.cleanliness = true;
+        if(getCleanliness() == false){
+            this.cleanliness = true;
+            System.out.println(this.getName() + " est nettoyé");
+        }
+         System.out.println(this.getName() + " est prore");
+     }
+
+     public boolean getCleanliness(){
+        return cleanliness;
      }
 
     public int getCreatureCount() {

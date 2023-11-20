@@ -1,6 +1,7 @@
 package fr.fantasticzoo.enclosures;
 
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
 
 import java.util.ArrayList;
 
@@ -15,12 +16,22 @@ public class Aquarium extends Enclosure{
         this.salinity = false;
     }
 
-    public void checkDepth(){
-        //vide
+    @Override
+    public void addCreatures(Creature creature) {
+        if (creature instanceof Swimmer){
+            super.addCreatures(creature);
+        }
+        else{
+            System.out.println("Vous ne pouvez pas ajouter la créature car elle ne nage pas");
+        }
     }
 
-    public void checkSalinity(){
-        //vide
+    @Override
+    public void clean(){
+        System.out.println("La profondeur est de : " + this.depth);
+        if (this.salinity == true){
+            super.clean();
+            System.out.println("L'aquarium est nettoyé");
+        }
     }
-
 }
