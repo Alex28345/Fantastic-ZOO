@@ -3,10 +3,8 @@ package fr.fantasticzoo.creatures.abstractClasses;
 
 import fr.fantasticzoo.enums.Sex;
 import fr.fantasticzoo.enums.Age;
-import javafx.scene.control.Button;
 
 public abstract class Creature {
-    protected Button button;
     protected String name;
     protected Sex sex;
     protected double weight;
