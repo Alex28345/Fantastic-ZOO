@@ -10,11 +10,13 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="fr.fantasticzoo.app.Controller">
 
     <Label text="les enclos :"/>
-    <HBox fx:id="enclosures" />
+    <FlowPane fx:id="enclosures" prefWidth="400" maxWidth="600">
+    </FlowPane>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
