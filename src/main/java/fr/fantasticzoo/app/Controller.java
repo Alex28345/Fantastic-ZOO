@@ -2,14 +2,22 @@ package fr.fantasticzoo.app;
 
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enums.EnclosureType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
-public class Controller {
+import java.lang.reflect.Array;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
     private Zoo zoo;
     private int i = 0;
     public void setZoo(Zoo zoo) {
@@ -24,11 +32,9 @@ public class Controller {
     @FXML
     private FlowPane enclosures;
 
-    @FXML Button enclosure;
-
     @FXML
     public void createEnclosure() {
-        Enclosure enclosure = new Enclosure("Enclos de : "+ selectedCreature.getValue().toString(), 100, 100);
+        Enclosure enclosure = new Enclosure("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100);
         this.zoo.addEnclosure(enclosure);
         Button newButton = new Button(enclosure.getName());
         newButton.setText(enclosure.getName());
@@ -46,5 +52,12 @@ public class Controller {
     }
 
     public void inspectEnclosure(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        for (EnclosureType type : EnclosureType.values()) {
+            selectedCreature.getItems().add(type);
+        }
     }
 }
