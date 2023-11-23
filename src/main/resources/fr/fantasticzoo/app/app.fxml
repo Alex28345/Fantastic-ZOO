@@ -31,18 +31,6 @@
     <ComboBox fx:id="selectedCreature">
         <layoutX>20</layoutX>
         <layoutY>50</layoutY>
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Lycanthropes"/>
-                <String fx:value="Licornes"/>
-                <String fx:value="Nymphes"/>
-                <String fx:value="Krakens"/>
-                <String fx:value="Sirènes"/>
-                <String fx:value="Mégalodons"/>
-                <String fx:value="Phénix"/>
-                <String fx:value="Dragons"/>
-            </FXCollections>
-        </items>
     </ComboBox>
     <Button text="Creer" onAction="#createEnclosure"/>
 </VBox>
