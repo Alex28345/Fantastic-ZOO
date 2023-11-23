@@ -28,7 +28,7 @@ public class Controller {
 
     @FXML
     public void createEnclosure() {
-        Enclosure enclosure = new Enclosure("enclos "+i, 100, 100);
+        Enclosure enclosure = new Enclosure("Enclos de : "+ selectedCreature.getValue().toString(), 100, 100);
         this.zoo.addEnclosure(enclosure);
         Button newButton = new Button(enclosure.getName());
         newButton.setText(enclosure.getName());
