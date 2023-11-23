@@ -68,6 +68,17 @@ public class Enclosure {
     public int getCreatureCount() {
         return creatureCount;
     }
+    public Creature[] getCreatures() {
+        Creature[] creatures = new Creature[this.getCreatureCount()];
+        int i = 0;
+        for (Creature creature : this.creatures) {
+            if (creature != null) {
+                creatures[i] = creature;
+                i++;
+            }
+        }
+        return creatures;
+    }
 
     public String getName() {
         return NAME;

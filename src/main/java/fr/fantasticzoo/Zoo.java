@@ -1,8 +1,12 @@
 package fr.fantasticzoo;
 
+import fr.fantasticzoo.creatures.abstractClasses.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
 
 import java.util.ArrayList;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Zoo {
     private String name;
@@ -34,7 +38,6 @@ public class Zoo {
             }
         }
     }
-
     public int getCreatureCount() {
         int creatureCount = 0;
         for (Enclosure enclosure : enclosures) {
@@ -44,8 +47,27 @@ public class Zoo {
         }
         return creatureCount;
     }
+    public Creature[] getCreatures() {
+        Creature[] creatures = new Creature[getCreatureCount()];
+        int i = 0;
+        for (Enclosure enclosure : enclosures) {
+            if (enclosure != null) {
+                for (Creature creature : enclosure.getCreatures()) {
+                    creatures[i] = creature;
+                    i++;
+                }
+            }
+        }
+        return creatures;
+    }
 
     public Enclosure[] getEnclosures() {
         return enclosures;
     }
+
+    public void start() {
+        Game game = new Game(this);
+        Thread gameThread = new Thread(game);
+        gameThread.start();
+    };
 }

@@ -1,18 +1,16 @@
 package fr.fantasticzoo.creatures.abstractClasses;
 
-
 import fr.fantasticzoo.enums.Sex;
-import fr.fantasticzoo.enums.Age;
 
 public abstract class Creature {
     protected String name;
     protected Sex sex;
     protected double weight;
     protected double height;
-    protected Age age;
+    protected int age;
     protected boolean isHungry;
     protected boolean isSleeping;
-    protected int health;
+    protected boolean isSick;
 
     public void feed(){
         System.out.println("I'm eating");
@@ -67,11 +65,11 @@ public abstract class Creature {
         this.height = height;
     }
 
-    public Age getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Age age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -91,11 +89,11 @@ public abstract class Creature {
         isSleeping = sleeping;
     }
 
-    public int getHealth() {
-        return health;
+    public boolean isSick() {
+        return isSick;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setSick(boolean health) {
+        this.isSick = health;
     }
 }

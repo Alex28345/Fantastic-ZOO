@@ -71,6 +71,12 @@ public class Controller implements Initializable {
         }
     }
 
+    @FXML
+    public void getAge() {
+        int age = this.zoo.getEnclosures()[0].getCreatures()[0].getAge();
+        System.out.println(age);
+    }
+
     public void inspectEnclosure(ActionEvent actionEvent) {
     }
 

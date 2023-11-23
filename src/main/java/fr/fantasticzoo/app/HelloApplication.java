@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -22,22 +23,21 @@ public class HelloApplication extends Application {
 
         Zoo zoo = new Zoo("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
         controller.setZoo(zoo);
-
+        zoo.start();
+        Enclosure enclosure = new Enclosure("premier enclos", 100, 10);
+        enclosure.addCreatures(new Dragon("paul"));
+        zoo.addEnclosure(enclosure);
 
         stage.setTitle("Zoo fantastique");
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            System.exit(0);
+        });
     }
 
     public static void main(String[] args) {
         launch();
-        Zoo zoo = new Zoo("zoodeouf", new FantasticZooMaster("Jean", Sex.male));
-        Enclosure enclosure = new Enclosure("premier enclos", 100, 100);
-        enclosure.addCreatures(new Dragon("paul"));
-        enclosure.addCreatures(new Dragon("paul2"));
-
-        enclosure.showCreatures();
-
-        zoo.addEnclosure(enclosure);
     }
 }
