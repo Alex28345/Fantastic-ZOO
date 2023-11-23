@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Enclosure {
-    final private String NAME; //nom de l'enclos
+    private String name; //nom de l'enclos
     private String CREATURE_TYPE; //type de créature de l'enclos (le nom des créatures de l'enclos)
     final private int surface; //surface en m²
     private int capacity; //nombre de créatures max
@@ -15,7 +15,7 @@ public class Enclosure {
     private boolean cleanliness; //propreté
 
     public Enclosure(String name, int surface, int capacity) {
-        this.NAME = name;
+        this.name = name;
         this.surface = surface;
         this.capacity = capacity;
         this.creatures = new ArrayList<Creature>(capacity);
@@ -27,7 +27,7 @@ public class Enclosure {
     }
 
     public String display(){
-        return "Noms de l'enclos : " + NAME + "\n" + "Surface : " + surface + "\n" + "Capacité : " + capacity + "\n" + "Nombre de créatures présentes : " + creatureCount + "\n" + "Etat : " + cleanliness;
+        return "Noms de l'enclos : " + name + "\n" + "Surface : " + surface + "\n" + "Capacité : " + capacity + "\n" + "Nombre de créatures présentes : " + creatureCount + "\n" + "Etat : " + cleanliness;
     }
      public void addCreatures(Creature creature) {
          if (this.CREATURE_TYPE == null)
@@ -70,7 +70,7 @@ public class Enclosure {
     }
 
     public String getName() {
-        return NAME;
+        return name;
     }
 
     public void showCreatures() {
@@ -79,5 +79,9 @@ public class Enclosure {
                 System.out.println(creature.getName());
             }
         }
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

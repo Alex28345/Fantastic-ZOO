@@ -1,5 +1,7 @@
 package fr.fantasticzoo;
 
+import fr.fantasticzoo.enclosures.Aquarium;
+import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.Enclosure;
 
 import java.util.ArrayList;
@@ -11,14 +13,11 @@ public class Zoo {
     final private int enclosureCount = 10;
     private Enclosure[] enclosures = new Enclosure[enclosureCount];
 
-    private ArrayList<Enclosure> LycanthropesEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> LicornesEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> NymphesEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> KrakensEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> SirènesEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> MégalodonsEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> PhénixEnclosures = new ArrayList<Enclosure>();
-    private ArrayList<Enclosure> DragonsEnclosures = new ArrayList<Enclosure>();
+
+    private ArrayList<Enclosure> VivariumsEnclosures = new ArrayList<Enclosure>();
+    private ArrayList<Aviary> AviariesEnclosures = new ArrayList<Aviary>();
+    private ArrayList<Aquarium> AquariumsEnclosures = new ArrayList<Aquarium>();
+
 
 
     public Zoo(String name, FantasticZooMaster fantasticZooMaster) {
@@ -47,5 +46,17 @@ public class Zoo {
 
     public Enclosure[] getEnclosures() {
         return enclosures;
+    }
+
+    public ArrayList<Enclosure> getVivariumsEnclosures() {
+        return VivariumsEnclosures;
+    }
+
+    public ArrayList<Aviary> getAviariesEnclosures() {
+        return AviariesEnclosures;
+    }
+
+    public ArrayList<Aquarium> getAquariumsEnclosures() {
+        return AquariumsEnclosures;
     }
 }
