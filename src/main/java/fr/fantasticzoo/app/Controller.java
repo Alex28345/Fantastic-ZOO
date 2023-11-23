@@ -28,11 +28,14 @@ public class Controller {
 
     @FXML
     public void createEnclosure() {
-        Enclosure enclosure = new Enclosure("enclos"+i, 100, 100);
+        Enclosure enclosure = new Enclosure("enclos "+i, 100, 100);
         this.zoo.addEnclosure(enclosure);
         Button newButton = new Button(enclosure.getName());
         newButton.setText(enclosure.getName());
         enclosures.getChildren().add(newButton);
+        newButton.setOnAction(e -> {
+            System.out.println("Bouton cliqué");
+        });
         i++;
         for(Enclosure enclosure1 : zoo.getEnclosures()){
             if (enclosure1 != null){
