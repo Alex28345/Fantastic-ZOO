@@ -6,10 +6,10 @@ import fr.fantasticzoo.enums.EnclosureType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -17,11 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -59,6 +55,7 @@ public class Controller implements Initializable {
 
     private void handleButtonAction(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("enclosureView.fxml"));
+        Controller controller = loader.<Controller>getController();
         try {
             Parent root = loader.load();
             Scene currentScene = ((Node) actionEvent.getSource()).getScene();
