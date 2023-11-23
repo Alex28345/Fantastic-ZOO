@@ -71,7 +71,7 @@ public class Controller implements Initializable {
         i++;
         for(Enclosure enclosure1 : zoo.getEnclosures()){
             if (enclosure1 != null){
-                System.out.print(enclosure1.getName());
+                System.out.print(enclosure1.getName() + " ");
             }
         }
         System.out.println(' ');

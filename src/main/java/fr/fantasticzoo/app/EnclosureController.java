@@ -13,7 +13,5 @@ public class EnclosureController {
     @FXML
     Label enclosureName;
 
-    String zoo = zoo.
-
 
 }
