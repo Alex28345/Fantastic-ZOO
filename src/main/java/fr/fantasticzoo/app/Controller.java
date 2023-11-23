@@ -1,6 +1,8 @@
 package fr.fantasticzoo.app;
 
 import fr.fantasticzoo.Zoo;
+import fr.fantasticzoo.enclosures.Aquarium;
+import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enums.EnclosureType;
 import javafx.event.ActionEvent;
@@ -38,10 +40,32 @@ public class Controller implements Initializable {
 
     @FXML
     public void createEnclosure() {
-        Enclosure enclosure = new Enclosure("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100);
-        this.zoo.addEnclosure(enclosure);
-        Button newButton = new Button(enclosure.getName());
-        newButton.setText(enclosure.getName());
+        Button newButton = new Button();
+        switch (selectedCreature.getValue().toString()){
+            case "Vivarium" :
+                Enclosure enclosure = new Enclosure("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100);
+                this.zoo.addEnclosure(enclosure);
+                this.zoo.getVivariumsEnclosures().add(enclosure);
+                enclosure.setName(enclosure.getName() + " " + zoo.getVivariumsEnclosures().size());
+                newButton.setText(enclosure.getName());
+            break;
+
+            case "Aquarium" :
+                Aquarium aquarium = new Aquarium("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100, 100);
+                this.zoo.addEnclosure(aquarium);
+                this.zoo.getAquariumsEnclosures().add(aquarium);
+                aquarium.setName(aquarium.getName() + " " + zoo.getAquariumsEnclosures().size());
+                newButton.setText(aquarium.getName());
+            break;
+
+            case "Volière" :
+                Aviary aviary = new Aviary("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100, 100);
+                this.zoo.addEnclosure(aviary);
+                this.zoo.getAviariesEnclosures().add(aviary);
+                aviary.setName(aviary.getName() + " " + zoo.getAviariesEnclosures().size());
+                newButton.setText(aviary.getName());
+            break;
+        }
         enclosures.getChildren().add(newButton);
         newButton.setOnAction(this::handleButtonAction);
         i++;
