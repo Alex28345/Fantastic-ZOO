@@ -3,6 +3,7 @@ package fr.fantasticzoo.app;
 import fr.fantasticzoo.FantasticZooMaster;
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.Dragon;
+import fr.fantasticzoo.creatures.StaticCreator;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enums.Sex;
 import javafx.application.Application;
@@ -25,7 +26,7 @@ public class HelloApplication extends Application {
         controller.setZoo(zoo);
         zoo.start();
         Enclosure enclosure = new Enclosure("premier enclos", 100, 10);
-        enclosure.addCreatures(new Dragon("paul"));
+        enclosure.addCreatures(StaticCreator.createDragon("Jean"));
         zoo.addEnclosure(enclosure);
 
         stage.setTitle("Zoo fantastique");
