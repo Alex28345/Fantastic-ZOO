@@ -79,9 +79,22 @@ public class Controller implements Initializable {
 
     private void handleButtonAction(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("enclosureView.fxml"));
+
         Controller controller = loader.<Controller>getController();
+
+        Object source = actionEvent.getSource(); // Récupère la source de l'évènement
+
+        //if (source instanceof Button) { // vérifie si la source est une instance de la classe Button (si c'est de type Button)
+            Button clickedButton = (Button) source; // crée un bouton qui va s'appeler clickedButton (Bouton sur lequel nous avons cliqué)
+            String buttonText = clickedButton.getText(); // La chaine de caractère aura pour valeur le texte qui a été assigné au bouton
+
         try {
             Parent root = loader.load();
+
+            EnclosureController enclosureController = loader.getController(); // on récupère le controller Enclosure controller
+
+            enclosureController.setData(buttonText); // cette fonction est juste un setter qui permet de récupérer le texte se trouvant sur le bouton sur lequel on a cliqué
+
             Scene currentScene = ((Node) actionEvent.getSource()).getScene();
             Scene newScene = new Scene(root);
             Stage stage = (Stage) currentScene.getWindow();
@@ -90,9 +103,6 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void inspectEnclosure(ActionEvent actionEvent) {
     }
 
     @Override

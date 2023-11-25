@@ -13,5 +13,12 @@ public class EnclosureController {
     @FXML
     Label enclosureName;
 
+    private Label label = new Label("");
+    public void setData(String data) {
+        label.setText(data);
+        enclosureName.setText(label.getText());
+        System.out.println(data);
+    }
+
 
 }
