@@ -33,5 +33,5 @@
         <layoutY>50</layoutY>
     </ComboBox>
     <Button text="Creer" onAction="#createEnclosure"/>
-    <Button text="getAge" onAction="#getAge"/>
+
 </VBox>
