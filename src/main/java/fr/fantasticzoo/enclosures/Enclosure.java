@@ -3,7 +3,6 @@ package fr.fantasticzoo.enclosures;
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Enclosure {
     private String name; //nom de l'enclos
@@ -72,6 +71,7 @@ public class Enclosure {
     public String getName() {
         return name;
     }
+
 
     public void showCreatures() {
         for (Creature creature : creatures) {

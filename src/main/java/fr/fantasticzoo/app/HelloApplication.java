@@ -15,15 +15,15 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        Zoo zoo = Zoo.getInstance("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
+        Enclosure enclosure = new Enclosure("premier enclos", 100, 100);
+        enclosure.addCreatures(new Dragon("paul"));
+        enclosure.showCreatures();
+        zoo.addEnclosure(enclosure);
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("app.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-
-        Controller controller = fxmlLoader.<Controller>getController();
-
-        Zoo zoo = new Zoo("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
-        controller.setZoo(zoo);
-
-
         stage.setTitle("Zoo fantastique");
         stage.setScene(scene);
         stage.show();
@@ -31,13 +31,5 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-        Zoo zoo = new Zoo("zoodeouf", new FantasticZooMaster("Jean", Sex.male));
-        Enclosure enclosure = new Enclosure("premier enclos", 100, 100);
-        enclosure.addCreatures(new Dragon("paul"));
-        enclosure.addCreatures(new Dragon("paul2"));
-
-        enclosure.showCreatures();
-
-        zoo.addEnclosure(enclosure);
     }
 }

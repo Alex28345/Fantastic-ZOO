@@ -5,6 +5,8 @@ import fr.fantasticzoo.enclosures.Aquarium;
 import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enums.EnclosureType;
+import javafx.beans.binding.Bindings;
+import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,41 +42,15 @@ public class Controller implements Initializable {
 
     @FXML
     public void createEnclosure() {
-        Button newButton = new Button();
-        switch (selectedCreature.getValue().toString()){
-            case "Vivarium" :
-                Enclosure enclosure = new Enclosure("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100);
-                this.zoo.addEnclosure(enclosure);
-                this.zoo.getVivariumsEnclosures().add(enclosure);
-                enclosure.setName(enclosure.getName() + " " + zoo.getVivariumsEnclosures().size());
-                newButton.setText(enclosure.getName());
-            break;
-
-            case "Aquarium" :
-                Aquarium aquarium = new Aquarium("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100, 100);
-                this.zoo.addEnclosure(aquarium);
-                this.zoo.getAquariumsEnclosures().add(aquarium);
-                aquarium.setName(aquarium.getName() + " " + zoo.getAquariumsEnclosures().size());
-                newButton.setText(aquarium.getName());
-            break;
-
-            case "Volière" :
-                Aviary aviary = new Aviary("Enclos de type : "+ selectedCreature.getValue().toString(), 100, 100, 100);
-                this.zoo.addEnclosure(aviary);
-                this.zoo.getAviariesEnclosures().add(aviary);
-                aviary.setName(aviary.getName() + " " + zoo.getAviariesEnclosures().size());
-                newButton.setText(aviary.getName());
-            break;
+        Enclosure enclosure = switch (selectedCreature.getValue().toString()) {
+            case "Vivarium" -> new Enclosure("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100);
+            case "Aquarium" -> new Aquarium("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100);
+            case "Volière" -> new Aviary("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100);
+            default -> null;
+        };
+        if(enclosure != null){
+            this.zoo.addEnclosure(enclosure);
         }
-        enclosures.getChildren().add(newButton);
-        newButton.setOnAction(this::handleButtonAction);
-        i++;
-        for(Enclosure enclosure1 : zoo.getEnclosures()){
-            if (enclosure1 != null){
-                System.out.print(enclosure1.getName() + " ");
-            }
-        }
-        System.out.println(' ');
     }
 
     private void handleButtonAction(ActionEvent actionEvent) {
@@ -107,8 +83,34 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.zoo = Zoo.getInstance();
         for (EnclosureType type : EnclosureType.values()) {
             selectedCreature.getItems().add(type);
         }
+        for(Node b : zoo.getObservableEnclosureMap().values()){
+            if (b instanceof Button button) {
+                button.setOnAction(this::enclosureButtonAction);
+                enclosures.getChildren().add(button);
+            }
+        }
+        zoo.getObservableEnclosureMap().addListener((MapChangeListener<Enclosure, Node>) change -> {
+            if (change.wasAdded()) {
+                // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
+                if(change.getValueAdded() instanceof Button button){
+                        button.setOnAction(this::enclosureButtonAction);
+                    enclosures.getChildren().add(button);
+                }
+            } else if (change.wasRemoved()) {
+                // Supprimer le bouton correspondant à chaque suppression dans la map
+                enclosures.getChildren().remove(change.getValueRemoved());
+            }
+        });
+    }
+
+    @FXML
+    public void enclosureButtonAction(ActionEvent actionEvent){
+        Button button = (Button) actionEvent.getSource();
+        System.out.println(zoo.getEnclosureWithButton(button).getName());
+        zoo.getEnclosureWithButton(button).showCreatures();
     }
 }
