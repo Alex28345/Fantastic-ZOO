@@ -19,23 +19,14 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Zoo zoo = Zoo.getInstance("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
         Enclosure enclosure = new Enclosure("premier enclos", 100, 100);
-        enclosure.addCreatures(new Dragon("paul"));
+        enclosure.addCreatures(StaticCreator.createDragon("paul"));
         enclosure.showCreatures();
         zoo.addEnclosure(enclosure);
 
+        zoo.start();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("app.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-
-        Controller controller = fxmlLoader.<Controller>getController();
-
-        Zoo zoo = new Zoo("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
-        controller.setZoo(zoo);
-        zoo.start();
-        Enclosure enclosure = new Enclosure("premier enclos", 100, 10);
-        enclosure.addCreatures(StaticCreator.createDragon("Jean"));
-        zoo.addEnclosure(enclosure);
-
         stage.setTitle("Zoo fantastique");
         stage.setScene(scene);
         stage.show();

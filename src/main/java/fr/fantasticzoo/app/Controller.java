@@ -87,9 +87,6 @@ public class Controller implements Initializable {
         System.out.println(age);
     }
 
-    public void inspectEnclosure(ActionEvent actionEvent) {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.zoo = Zoo.getInstance();
