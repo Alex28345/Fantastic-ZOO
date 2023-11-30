@@ -1,14 +1,10 @@
 package fr.fantasticzoo.app;
 
 import fr.fantasticzoo.Zoo;
-import fr.fantasticzoo.creatures.abstractClasses.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnclosureController {
     private Zoo zoo;
@@ -34,6 +30,7 @@ public class EnclosureController {
         label.setText(data);
         enclosureName.setText(label.getText());
         System.out.println(data);
+        this.zoo = Zoo.getInstance();
         //actualEnclosure = enclosureList.get(enclosureList.indexOf(label.getText()));
         //int creatureCount = actualEnclosure.getCreatureCount();
         //actualEnclosure.showCreatures();
