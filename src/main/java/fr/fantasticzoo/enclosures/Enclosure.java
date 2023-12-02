@@ -73,12 +73,14 @@ public class Enclosure {
     }
 
 
-    public void showCreatures() {
+    public String showCreatures() {
+        StringBuilder creaturesInfo = new StringBuilder();
         for (Creature creature : creatures) {
             if (creature != null) {
-                System.out.println(creature.getName());
+                creaturesInfo.append(creature.getName()).append("\n");
             }
         }
+        return creaturesInfo.toString();
     }
 
     public void setName(String name) {

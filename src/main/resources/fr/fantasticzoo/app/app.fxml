@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.FlowPane?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fr.fantasticzoo.app.Controller">
+      fx:controller="fr.fantasticzoo.app.Controller" stylesheets="@style.css">
 
-    <Label text="les enclos :"/>
+    <Label text="les enclos :" fx:id="Title"/>
     <FlowPane fx:id="enclosures" prefWidth="400" maxWidth="600">
     </FlowPane>
     <padding>

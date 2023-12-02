@@ -6,8 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="800">
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="800" stylesheets="@style.css">
     <top>
-        <Label fx:id="enclosureName" text="Enclos de :"></Label>
+        <HBox alignment="CENTER">
+            <Label fx:id="enclosureName" text="Enclos de :" textAlignment="CENTER"></Label>
+
+        </HBox>
     </top>
+    <left>
+        <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
+            <Label fx:id="creaturesTitle" text="Créatures"></Label>
+        </VBox>
+    </left>
+    <center>
+        <VBox fx:id="creaturesInfo">
+        </VBox>
+    </center>
 </BorderPane>

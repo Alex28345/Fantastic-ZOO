@@ -86,6 +86,7 @@ public class Controller implements Initializable {
             Parent root = loader.load();
 
             EnclosureController enclosureController = loader.getController(); // on récupère le controller Enclosure controller
+            enclosureController.setZoo(zoo);
 
             enclosureController.setData(buttonText); // cette fonction est juste un setter qui permet de récupérer le texte se trouvant sur le bouton sur lequel on a cliqué
 

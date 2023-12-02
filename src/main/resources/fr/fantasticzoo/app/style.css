@@ -1,0 +1,16 @@
+#welcomeText, #Title{
+    -fx-font-size: 25px;
+}
+
+#enclosureName{
+    -fx-font-size: 25px;
+}
+
+#creaturesTitle{
+    -fx-font-size: 20px;
+}
+
+Button{
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+}
