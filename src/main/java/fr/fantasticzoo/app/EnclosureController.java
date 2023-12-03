@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,12 +44,16 @@ public class EnclosureController {
     @FXML
     VBox creaturesInfo;
 
+    @FXML
+    VBox actions;
+
 
     private String creatures;
 
     Label creatureShow = new Label("");
 
     private Label label = new Label("");
+
     public void setData(String data) {
         label.setText(data);
         enclosureName.setText(label.getText());
@@ -81,6 +87,98 @@ public class EnclosureController {
     }
 
     @FXML
+    public void addCreature(ActionEvent actionEvent){
+        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label));
+
+        actions.getChildren().removeAll(actions.getChildren());
+
+        Label labelAdd = new Label("Entrez le nom d'une Créature à ajouter");
+        TextField textField = new TextField();
+        actions.getChildren().addAll(labelAdd, textField);
+
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+
+                String creatureName = textField.getText();
+//                Creature newCreature = new Creature(creatureName);
+//                enclosure.addCreatures(newCreature);
+
+                Label creatureLabel = new Label("Nouvelle créature : " + creatureName);
+                actions.getChildren().add(creatureLabel);
+
+                textField.clear();
+            }
+        });
+    }
+
+    @FXML
+    public  void removeCreature(ActionEvent actionEvent){
+        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label));
+
+        actions.getChildren().removeAll(actions.getChildren());
+
+        Label labelAdd = new Label("Entrez le nom d'une Créature à retirer");
+        TextField textField = new TextField();
+        actions.getChildren().addAll(labelAdd, textField);
+
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+
+                String creatureName = textField.getText();
+                for (Creature creature : enclosure.getCreatures()) {
+                    if (creature.getName().equals(creatureName)){
+                        enclosure.removeCreatures(creature);
+                    }
+
+                }
+
+                Label creatureLabel = new Label("Créature retirée : " + creatureName);
+                actions.getChildren().add(creatureLabel);
+
+                textField.clear();
+            }
+        });
+    }
+    @FXML
+    public void feedCreatures(ActionEvent actionEvent){
+        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label));
+
+        actions.getChildren().removeAll(actions.getChildren());
+
+        if(enclosure != null){
+            for (Creature creature : enclosure.getCreatures()) {
+                enclosure.feedCreatures(creature);
+            }
+
+            Label areFeededLabel = new Label("Les créatures ont été nourrits !");
+            actions.getChildren().add(areFeededLabel);
+        }
+        else {
+            Label notFoundLabel = new Label("L'enclos n'a pas été trouvé !");
+            actions.getChildren().add(notFoundLabel);
+        }
+    }
+
+    @FXML
+    public void cleanEnclosure(ActionEvent actionEvent){
+        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label));
+
+        actions.getChildren().removeAll(actions.getChildren());
+
+        if (enclosure != null){
+            enclosure.clean();
+            enclosure.setCleanliness();
+            Label isCleanLabel = new Label("L'enclos a été nettoyé !");
+            actions.getChildren().add(isCleanLabel);
+        }
+
+        else {
+            Label notFoundLabel = new Label("L'enclos n'a pas été trouvé !");
+            actions.getChildren().add(notFoundLabel);
+        }
+    }
+
+    @FXML
     public void returnMenu(ActionEvent actionEvent){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
         try {
@@ -95,6 +193,4 @@ public class EnclosureController {
             e.printStackTrace();
         }
     }
-
-
 }

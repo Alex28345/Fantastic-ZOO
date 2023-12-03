@@ -27,15 +27,19 @@
 
     <right>
         <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
-            <Button text="Ajouter"/>
-            <Button text="Enlever"/>
-            <Button text="Nourrir"/>
+            <Button text="Ajouter" onAction="#addCreature"/>
+            <Button text="Enlever" onAction="#removeCreature"/>
+            <Button text="Nourrir" onAction="#feedCreatures"/>
             <Button text="Entretenir"/>
         </VBox>
     </right>
     <center>
-        <VBox fx:id="creaturesInfo" alignment="CENTER">
-            <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
+        <VBox spacing="20" alignment="CENTER">
+            <VBox fx:id="creaturesInfo" alignment="CENTER">
+                <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
+            </VBox>
+            <VBox fx:id="actions">
+            </VBox>
         </VBox>
     </center>
     <bottom>
