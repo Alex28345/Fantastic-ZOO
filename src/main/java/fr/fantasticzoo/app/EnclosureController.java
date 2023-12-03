@@ -22,6 +22,14 @@ public class EnclosureController {
 
     @FXML
     Label enclosureName;
+    @FXML
+    Label enclosureSurface;
+    @FXML
+    Label enclosureCreaturesMax;
+    @FXML
+    Label enclosureCreaturesCount;
+    @FXML
+    Label enclosureCleanliness;
 
     @FXML
     VBox creaturesName;
@@ -34,10 +42,18 @@ public class EnclosureController {
     public void setData(String data) {
         label.setText(data);
         enclosureName.setText(label.getText());
+
+
         System.out.println(data);
         this.zoo = Zoo.getInstance();
 
         Enclosure enclosure = zoo.getEnclosureByName(data);
+
+        //informations de l'enclos
+        enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
+        enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
+        enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
+        enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
 
         creatureShow.setText(enclosure.showCreatures());
         creaturesName.getChildren().add(creatureShow);

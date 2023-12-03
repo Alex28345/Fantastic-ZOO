@@ -64,6 +64,11 @@ public class Enclosure {
         return cleanliness;
      }
 
+     public String getCleanlinessToString(){
+        if(cleanliness == true) return "Propre";
+        else return "Sale";
+     }
+
     public int getCreatureCount() {
         return creatureCount;
     }
@@ -71,6 +76,10 @@ public class Enclosure {
     public String getName() {
         return name;
     }
+
+    public int getSurface(){ return surface; }
+
+    public int getCapacity(){ return capacity; }
 
 
     public String showCreatures() {

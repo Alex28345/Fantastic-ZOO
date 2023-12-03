@@ -9,10 +9,15 @@
 <?import java.net.URL?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="800" stylesheets="@style.css">
     <top>
-        <HBox alignment="CENTER">
+        <VBox alignment="CENTER">
             <Label fx:id="enclosureName" text="Enclos de :" textAlignment="CENTER"></Label>
-
-        </HBox>
+            <HBox alignment="CENTER" spacing="20">
+                <Label fx:id="enclosureSurface" text="Superficie : " textAlignment="CENTER"></Label>
+                <Label fx:id="enclosureCreaturesMax" text="Nombre maximal de créatures : " textAlignment="CENTER"></Label>
+                <Label fx:id="enclosureCleanliness" text="Propreté de l'enclos : " textAlignment="CENTER"></Label>
+                <Label fx:id="enclosureCreaturesCount" text="Nombre de créatures présentes : " textAlignment="CENTER"></Label>
+            </HBox>
+        </VBox>
     </top>
     <left>
         <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
