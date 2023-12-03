@@ -49,6 +49,10 @@ public class Enclosure {
      public void removeCreatures(Creature creature){
         this.creatures.remove(creature);
      }
+     /*Supprimme la dernière créature*/
+     public void removeCreature(){
+        this.creatures.remove(creatures.size()-1);
+     }
      public void feedCreatures(Creature creature){
         this.creatures.get(this.creatures.indexOf(creature)).feed();
      }
@@ -62,6 +66,10 @@ public class Enclosure {
 
      public boolean getCleanliness(){
         return cleanliness;
+     }
+
+     public void setCleanliness(){
+         this.cleanliness = true;
      }
 
      public String getCleanlinessToString(){
