@@ -69,13 +69,9 @@ public class Enclosure {
         else return "Sale";
      }
 
-    public int getCreatureCount() {
-        return creatureCount;
-    }
+    public int getCreatureCount() { return creatureCount; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public int getSurface(){ return surface; }
 
