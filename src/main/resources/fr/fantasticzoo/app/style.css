@@ -6,8 +6,21 @@
     -fx-font-size: 25px;
 }
 
-#creaturesTitle{
+#creaturesTitle, #creaturesLabel{
     -fx-font-size: 20px;
+}
+
+#enclosureInfos{
+    -fx-content-display: flex;
+    -fx-wrap-text: wrap;
+}
+
+#creaturesName, #enclosureActions, #creaturesInfo, #menuBtn{
+    -fx-padding: 10px;
+}
+
+Label{
+    -fx-font-size: 15px;
 }
 
 Button{

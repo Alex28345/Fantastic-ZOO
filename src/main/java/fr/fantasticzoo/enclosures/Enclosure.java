@@ -91,4 +91,8 @@ public class Enclosure {
     public void setName(String name) {
         this.name = name;
     }
+
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
+    }
 }

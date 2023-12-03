@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="800" stylesheets="@style.css">
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="900" stylesheets="@style.css">
     <top>
         <VBox alignment="CENTER">
             <Label fx:id="enclosureName" text="Enclos de :" textAlignment="CENTER"/>
-            <HBox alignment="CENTER" spacing="20">
+            <HBox alignment="CENTER" spacing="20" fx:id="enclosureInfo">
                 <Label fx:id="enclosureSurface" text="Superficie : " textAlignment="CENTER"/>
                 <Label fx:id="enclosureCreaturesMax" text="Nombre maximal de créatures : " textAlignment="CENTER"/>
                 <Label fx:id="enclosureCleanliness" text="Propreté de l'enclos : " textAlignment="CENTER"/>
@@ -24,11 +24,23 @@
             <Label fx:id="creaturesTitle" text="Créatures"/>
         </VBox>
     </left>
+
+    <right>
+        <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
+            <Button text="Ajouter"/>
+            <Button text="Enlever"/>
+            <Button text="Nourrir"/>
+            <Button text="Entretenir"/>
+        </VBox>
+    </right>
     <center>
-        <VBox fx:id="creaturesInfo">
+        <VBox fx:id="creaturesInfo" alignment="CENTER">
+            <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
         </VBox>
     </center>
     <bottom>
-        <Button fx:id="menuButton" text="Retour au menu" onAction="#returnMenu"/>
+        <HBox fx:id="menuBtn">
+            <Button fx:id="menuButton" text="Retour au menu" onAction="#returnMenu"/>
+        </HBox>
     </bottom>
 </BorderPane>

@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     private Zoo zoo;
-    private int i = 0;
+    private final int i = 0;
     public void setZoo(Zoo zoo) {
         this.zoo = zoo;
     }

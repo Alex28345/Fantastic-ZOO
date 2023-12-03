@@ -39,6 +39,9 @@ public class EnclosureController {
 
     @FXML
     VBox creaturesName;
+    @FXML
+    VBox creaturesInfo;
+
 
     private String creatures;
 
@@ -63,9 +66,18 @@ public class EnclosureController {
 
         creatureShow.setText(enclosure.showCreatures());
         creaturesName.getChildren().add(creatureShow);
-        /*for (int index = 0; index < enclosure.getCreatureCount(); ++index) {
 
-        }*/
+        for (Creature creature : enclosure.getCreatures()) {
+            if (creature != null){
+                Label creatureLabel = new Label(creature.getName() + " : ");
+                creaturesInfo.getChildren().add(creatureLabel);
+
+                Label creatureInfoLablel = new Label("Age : " + String.valueOf(creature.getAge()
+                        + " Sexe : " + creature.getSex() + " Poids : "+ creature.getWeight() +
+                        " Hauteur : " + creature.getHeight() + " Etat de santé : " +  creature.getHealth()));
+                creaturesInfo.getChildren().add(creatureInfoLablel);
+            }
+        }
     }
 
     @FXML
