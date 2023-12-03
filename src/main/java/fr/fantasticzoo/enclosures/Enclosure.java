@@ -64,9 +64,7 @@ public class Enclosure {
          System.out.println(this.getName() + " est prore");
      }
 
-     public boolean getCleanliness(){
-        return cleanliness;
-     }
+     public boolean getCleanliness(){ return cleanliness; }
 
      public void setCleanliness(){
          this.cleanliness = true;
@@ -85,7 +83,6 @@ public class Enclosure {
 
     public int getCapacity(){ return capacity; }
 
-
     public String showCreatures() {
         StringBuilder creaturesInfo = new StringBuilder();
         for (Creature creature : creatures) {
@@ -96,11 +93,7 @@ public class Enclosure {
         return creaturesInfo.toString();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public ArrayList<Creature> getCreatures() {
-        return creatures;
-    }
+    public ArrayList<Creature> getCreatures() { return creatures; }
 }
