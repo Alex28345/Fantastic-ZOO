@@ -13,8 +13,4 @@ public class Lycanthrope extends Viviparous implements Flyer, Runner {
         this.isHungry = false;
         this.isSick = false;
     }
-    @Override
-    public void fly() {}
-    @Override
-    public void run() {}
 }

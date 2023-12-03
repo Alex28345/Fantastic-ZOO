@@ -14,7 +14,4 @@ public class Kraken extends Oviparous implements Swimmer {
         this.isSick = false;
     }
 
-    @Override
-    public void swim() {
-    }
 }

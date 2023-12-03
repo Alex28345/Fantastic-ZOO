@@ -12,7 +12,4 @@ public class Siren extends Viviparous implements Swimmer {
         this.isHungry = false;
         this.isSick = false;
     }
-    @Override
-    public void swim() {
-    }
 }

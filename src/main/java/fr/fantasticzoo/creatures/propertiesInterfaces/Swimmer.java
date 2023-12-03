@@ -1,5 +1,7 @@
 package fr.fantasticzoo.creatures.propertiesInterfaces;
 
 public interface Swimmer {
-    public void swim();
+    public default void swim(){
+        System.out.println("I'm swimming");
+    }
 }

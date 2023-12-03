@@ -12,9 +12,4 @@ public class Unicorn extends Viviparous implements Runner {
         this.isHungry = false;
         this.isSick = false;
     }
-    @Override
-    public void run() {
-
-    }
-
 }

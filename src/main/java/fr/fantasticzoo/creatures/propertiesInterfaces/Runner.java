@@ -1,5 +1,7 @@
 package fr.fantasticzoo.creatures.propertiesInterfaces;
 
 public interface Runner {
-    public void run();
+    public default void run(){
+        System.out.println("I'm running");
+    }
 }

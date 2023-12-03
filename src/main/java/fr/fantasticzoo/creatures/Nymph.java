@@ -12,6 +12,4 @@ public class Nymph extends Viviparous implements Immortal {
         this.isHungry = false;
         this.isSick = false;
     }
-    @Override
-    public void resurrect() {}
 }

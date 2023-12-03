@@ -13,12 +13,4 @@ public class Phoenix extends Oviparous implements Flyer, Immortal {
         this.isHungry = false;
         this.isSick = false;
     }
-    @Override
-    public void fly() {
-
-    }
-    @Override
-    public void resurrect() {
-
-    }
 }

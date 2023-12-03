@@ -12,24 +12,4 @@ public class Dragon extends Oviparous implements Runner, Swimmer, Flyer, Immorta
         this.isHungry = false;
         this.isSick = false;
     }
-
-    @Override
-    public void fly() {
-
-    }
-
-    @Override
-    public void resurrect() {
-
-    }
-
-    @Override
-    public void run() {
-
-    }
-
-    @Override
-    public void swim() {
-
-    }
 }

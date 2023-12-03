@@ -1,6 +1,7 @@
 module fr.fantasticzoo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.fasterxml.jackson.databind;
 
 
     opens fr.fantasticzoo to javafx.fxml;

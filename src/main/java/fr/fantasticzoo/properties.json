@@ -1,3 +1,5 @@
 {
-  "iterationSpeed": 3000 //unité de temps du jeu en milisecondes
+  "iterationSpeed": 3000 //temps entre 2 iteration du jeu en milisecondes
+  "sickProbalility": 10 //probabilité qu'une creature tombe malade en %
+  "sickMaxCount" : 3 //nombre maximal de creatures qui tombent malade en meme temps
 }

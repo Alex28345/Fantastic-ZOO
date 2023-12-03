@@ -13,9 +13,4 @@ public class Megalodon extends Oviparous implements Swimmer {
         this.isHungry = false;
         this.isSick = false;
     }
-
-    @Override
-    public void swim() {
-
-    }
 }
