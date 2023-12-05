@@ -1,31 +1,20 @@
 package fr.fantasticzoo;
 
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
-import fr.fantasticzoo.enclosures.Aquarium;
-import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.Enclosure;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Zoo {
     private String name;
     private FantasticZooMaster fantasticZooMaster;
 
     final private int enclosureCount = 10;
-    private Enclosure[] enclosures = new Enclosure[enclosureCount];
     private ObservableMap<Enclosure, Node> observableEnclosureMap;
     private static Zoo instance;
 
@@ -51,33 +40,27 @@ public class Zoo {
     }
 
     public void addEnclosure(Enclosure enclosure) {
-        for (int i = 0; i < enclosures.length; i++) {
-            if (enclosures[i] == null && enclosures[i]!= enclosure) {
-                enclosures[i] = enclosure;
-                observableEnclosureMap.put(enclosure, new Button(enclosure.getName()));
-                break;
-            }
+        if(observableEnclosureMap.size() > enclosureCount) {
+            System.out.println("L'enclos n'a pas pu être ajouté, le zoo est plein");
+        }else{
+            observableEnclosureMap.put(enclosure, new Button(enclosure.getName()));
         }
     }
+
     public int getCreatureCount() {
         int creatureCount = 0;
-        for (Enclosure enclosure : enclosures) {
+        for (Enclosure enclosure : this.getAllEnclosures()) {
             if (enclosure != null) {
                 creatureCount += enclosure.getCreatureCount();
             }
         }
         return creatureCount;
     }
-    public Creature[] getCreatures() {
-        Creature[] creatures = new Creature[getCreatureCount()];
+    public ArrayList<Creature> getCreatures() {
+        ArrayList<Creature> creatures = new ArrayList<Creature>();
         int i = 0;
-        for (Enclosure enclosure : enclosures) {
-            if (enclosure != null) {
-                for (Creature creature : enclosure.getCreatures()) {
-                    creatures[i] = creature;
-                    i++;
-                }
-            }
+        for (Enclosure enclosure : this.getAllEnclosures()) {
+            creatures.addAll(enclosure.getCreatures());
         }
         return creatures;
     }
@@ -90,26 +73,14 @@ public class Zoo {
                 .orElse(null);
     }
 
-    public Enclosure[] getEnclosures() {
-        return enclosures;
+    public Set<Enclosure> getEnclosures() {
+        return this.getAllEnclosures();
     }
-
-    public void start() throws FileNotFoundException {
-        Game game = new Game();
-        Thread gameThread = new Thread(game);
-        gameThread.start();
-    };
 
     public ObservableMap<Enclosure, Node> getObservableEnclosureMap() {
         return observableEnclosureMap;
     }
-
-    public Enclosure getEnclosureByName(String enclosureName) {
-        for (Enclosure enclosure : enclosures) {
-            if (enclosure != null && enclosure.getName().equals(enclosureName)) {
-                return enclosure;
-            }
-        }
-        return null;
+    private Set<Enclosure> getAllEnclosures(){
+        return observableEnclosureMap.keySet();
     }
 }

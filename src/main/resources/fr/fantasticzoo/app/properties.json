@@ -1,7 +1,7 @@
 {
-  "timeBetweenTurns": 2000,
-  "sickProbability": 10,
-  "sleepProbability": 10,
-  "hungerProbability": 10,
+  "timeBetweenTurns": 5000,
+  "sickProbability": 5,
+  "sleepProbability": 5,
+  "hungerProbability": 5,
   "cleanProbability": 10
 }

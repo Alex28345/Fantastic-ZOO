@@ -26,9 +26,6 @@ public class Enclosure {
         this.surface = surface;
         this.capacity = capacity;
         this.creatures = new ArrayList<Creature>(capacity);
-        for (int i = 0; i < capacity; i++) {
-            this.creatures.add(null);
-        }
         this.creatureCount = 0;
         this.cleanliness = true;
 
@@ -42,17 +39,17 @@ public class Enclosure {
          if (this.CREATURE_TYPE == null)
              this.CREATURE_TYPE = creature.getClass().toString();
          if(creature.getClass().toString().equals(CREATURE_TYPE)) {
-             for (int i = 0; i < creatures.size(); i++) {
-                 if(creatures.get(i) == null){
-                     if (!creatures.contains(creature) ) {
-                         this.creatures.add(creature);
-                         creatureCount++;
-                         return;
-                     }
+             if(creatures.size() < capacity){
+                 if (!creatures.contains(creature) ) {
+                     this.creatures.add(creature);
+                     creatureCount++;
+                     return;
+                 }else {
                      System.out.println("\u001B[31mLa créature est déjà dans l'enclos\u001B[0m");
                  }
+             }else {
+                 System.out.println("\u001B[31mL'enclos est plein\u001B[0m");
              }
-             System.out.println("\u001B[31mL'enclos est plein\u001B[0m");
          }else
              System.out.println("\u001B[31mLa créature n'est pas du bon type\u001B[0m");
      }
@@ -117,7 +114,9 @@ public class Enclosure {
 
     public void setName(String name) { this.name = name; }
 
-    public ArrayList<Creature> getCreatures() { return creatures; }
+    public ArrayList<Creature> getCreatures() {
+         return creatures;
+     }
 
     public ObservableList<Creature> getCreaturesProperty() {
         return creaturesProperty.get();

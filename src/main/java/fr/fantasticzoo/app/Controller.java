@@ -53,10 +53,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.zoo = Zoo.getInstance();
         for (EnclosureType type : EnclosureType.values()) {
             selectedCreature.getItems().add(type);
         }
+
+        this.zoo = Zoo.getInstance();
+
         for(Node b : zoo.getObservableEnclosureMap().values()){
             if (b instanceof Button button) {
                 button.setOnAction(this::enclosureButtonAction);
@@ -78,27 +80,14 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void enclosureButtonAction(ActionEvent actionEvent){
-        Button button = (Button) actionEvent.getSource();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("enclosureView.fxml"));
-        String buttonText = button.getText();
+    public void enclosureButtonAction(ActionEvent actionEvent) {
+        EnclosureController controller = null;
         try {
-            Parent root = loader.load();
-
-            EnclosureController enclosureController = loader.getController(); // on récupère le controller Enclosure controller
-            enclosureController.setZoo(zoo);
-
-            enclosureController.setData(buttonText); // cette fonction est juste un setter qui permet de récupérer le texte se trouvant sur le bouton sur lequel on a cliqué
-
-            Scene currentScene = ((Node) actionEvent.getSource()).getScene();
-            Scene newScene = new Scene(root);
-            Stage stage = (Stage) currentScene.getWindow();
-            stage.setScene(newScene);
-            stage.show();
+            controller = HelloApplication.changeScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), "enclosureView.fxml", "Enclos");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        System.out.println(zoo.getEnclosureWithButton(button).getName());
-        zoo.getEnclosureWithButton(button).showCreatures();
+        Button b = (Button) actionEvent.getSource();
+        controller.setData(zoo.getEnclosureWithButton(b));
     }
 }
