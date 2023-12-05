@@ -27,3 +27,8 @@ Button{
     -fx-border-width: 2;
     -fx-background-radius: 0;
 }
+
+Gridpane{
+    -fx-hgap: 20px;
+    -fx-alignment: center;
+}

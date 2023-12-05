@@ -20,6 +20,7 @@
         </VBox>
     </top>
     <left>
+
         <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
             <Label fx:id="creaturesTitle" text="Créatures"/>
         </VBox>
@@ -30,13 +31,14 @@
             <Button text="Ajouter" onAction="#addCreature"/>
             <Button text="Enlever" onAction="#removeCreature"/>
             <Button text="Nourrir" onAction="#feedCreatures"/>
-            <Button text="Entretenir"/>
+            <Button text="Entretenir" onAction="#cleanEnclosure"/>
         </VBox>
     </right>
     <center>
         <VBox spacing="20" alignment="CENTER">
             <VBox fx:id="creaturesInfo" alignment="CENTER">
                 <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
+                <GridPane fx:id="gridPane" hgap="15" alignment="CENTER"></GridPane>
             </VBox>
             <VBox fx:id="actions">
             </VBox>

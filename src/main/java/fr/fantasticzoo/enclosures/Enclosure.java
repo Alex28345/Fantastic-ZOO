@@ -1,6 +1,10 @@
 package fr.fantasticzoo.enclosures;
 
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.enums.CreatureNames;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -13,6 +17,10 @@ public class Enclosure {
     private ArrayList<Creature> creatures; //liste des cratures présentes
     private boolean cleanliness; //propreté
 
+    private ArrayList<String> creaturesNames = new ArrayList<String>();
+
+    private SimpleListProperty<Creature> creaturesProperty;
+
     public Enclosure(String name, int surface, int capacity) {
         this.name = name;
         this.surface = surface;
@@ -23,6 +31,8 @@ public class Enclosure {
         }
         this.creatureCount = 0;
         this.cleanliness = true;
+
+        this.creaturesProperty = new SimpleListProperty<>(FXCollections.observableList(creatures));
     }
 
     public String display(){
@@ -54,7 +64,20 @@ public class Enclosure {
         this.creatures.remove(creatures.size()-1);
      }
      public void feedCreatures(Creature creature){
-        this.creatures.get(this.creatures.indexOf(creature)).feed();
+         if (creature != null){
+             int index = creatures.indexOf(creature);
+             if (index >= 0 && index < creatures.size()) {
+                 creatures.get(index).feed();
+             }
+             else{
+                 System.out.println("La créature n'a pas été touvée...");
+             }
+
+         }
+         else{
+             System.out.println("Pas de créature dans la liste");
+         }
+        //this.creatures.get(this.creatures.indexOf(creature)).feed();
      }
      public void clean(){
         if(getCleanliness() == false){
@@ -96,4 +119,29 @@ public class Enclosure {
     public void setName(String name) { this.name = name; }
 
     public ArrayList<Creature> getCreatures() { return creatures; }
+
+    public ObservableList<Creature> getCreaturesProperty() {
+        return creaturesProperty.get();
+    }
+
+    public SimpleListProperty<Creature> creaturesProperty() {
+        return creaturesProperty;
+    }
+
+    public void addCreaturesName(){
+        if (creatures != null) {
+            for (Creature creature : creatures) {
+                if (creature != null) {
+                    creaturesNames.add(creature.getName());
+                }
+            }
+        } else {
+            System.out.println("La liste de créatures est null.");
+        }
+    }
+
+    public  ArrayList<String> getCreaturesNames(){
+        this.addCreaturesName();
+         return creaturesNames;
+    }
 }
