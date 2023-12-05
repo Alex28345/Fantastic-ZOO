@@ -6,8 +6,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="800">
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.fantasticzoo.app.EnclosureController" prefHeight="800" prefWidth="900" stylesheets="@style.css">
     <top>
-        <Label fx:id="enclosureName" text="Enclos de :"></Label>
+        <VBox alignment="CENTER">
+            <Label fx:id="enclosureName" text="Enclos de :" textAlignment="CENTER"/>
+            <HBox alignment="CENTER" spacing="20" fx:id="enclosureInfo">
+                <Label fx:id="enclosureSurface" text="Superficie : " textAlignment="CENTER"/>
+                <Label fx:id="enclosureCreaturesMax" text="Nombre maximal de créatures : " textAlignment="CENTER"/>
+                <Label fx:id="enclosureCleanliness" text="Propreté de l'enclos : " textAlignment="CENTER"/>
+                <Label fx:id="enclosureCreaturesCount" text="Nombre de créatures présentes : " textAlignment="CENTER"/>
+            </HBox>
+        </VBox>
     </top>
+    <left>
+
+        <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
+            <Label fx:id="creaturesTitle" text="Créatures"/>
+        </VBox>
+    </left>
+
+    <right>
+        <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
+            <Button text="Ajouter" onAction="#addCreature"/>
+            <Button text="Enlever" onAction="#removeCreature"/>
+            <Button text="Nourrir" onAction="#feedCreatures"/>
+            <Button text="Entretenir" onAction="#cleanEnclosure"/>
+        </VBox>
+    </right>
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <VBox fx:id="creaturesInfo" alignment="CENTER">
+                <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
+                <GridPane fx:id="gridPane" hgap="15" alignment="CENTER"></GridPane>
+            </VBox>
+            <VBox fx:id="actions">
+            </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox fx:id="menuBtn">
+            <Button fx:id="menuButton" text="Retour au menu" onAction="#returnMenu"/>
+        </HBox>
+    </bottom>
 </BorderPane>

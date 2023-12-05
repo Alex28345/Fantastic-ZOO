@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     private Zoo zoo;
-    private int i = 0;
+    private final int i = 0;
     public void setZoo(Zoo zoo) {
         this.zoo = zoo;
     }
@@ -38,8 +38,6 @@ public class Controller implements Initializable {
     private ComboBox selectedCreature;
     @FXML
     private FlowPane enclosures;
-    Button newButton = new Button();
-
     @FXML
     public void createEnclosure() {
         Enclosure enclosure = switch (selectedCreature.getValue().toString()) {
@@ -51,40 +49,6 @@ public class Controller implements Initializable {
         if(enclosure != null){
             this.zoo.addEnclosure(enclosure);
         }
-    }
-
-    private void handleButtonAction(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("enclosureView.fxml"));
-
-        Controller controller = loader.<Controller>getController();
-
-        Object source = actionEvent.getSource(); // Récupère la source de l'évènement
-
-        //if (source instanceof Button) { // vérifie si la source est une instance de la classe Button (si c'est de type Button)
-            Button clickedButton = (Button) source; // crée un bouton qui va s'appeler clickedButton (Bouton sur lequel nous avons cliqué)
-            String buttonText = clickedButton.getText(); // La chaine de caractère aura pour valeur le texte qui a été assigné au bouton
-
-        try {
-            Parent root = loader.load();
-
-            EnclosureController enclosureController = loader.getController(); // on récupère le controller Enclosure controller
-
-            enclosureController.setData(buttonText); // cette fonction est juste un setter qui permet de récupérer le texte se trouvant sur le bouton sur lequel on a cliqué
-
-            Scene currentScene = ((Node) actionEvent.getSource()).getScene();
-            Scene newScene = new Scene(root);
-            Stage stage = (Stage) currentScene.getWindow();
-            stage.setScene(newScene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void getAge() {
-        int age = this.zoo.getEnclosures()[0].getCreatures()[0].getAge();
-        System.out.println(age);
     }
 
     @Override
@@ -116,6 +80,24 @@ public class Controller implements Initializable {
     @FXML
     public void enclosureButtonAction(ActionEvent actionEvent){
         Button button = (Button) actionEvent.getSource();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("enclosureView.fxml"));
+        String buttonText = button.getText();
+        try {
+            Parent root = loader.load();
+
+            EnclosureController enclosureController = loader.getController(); // on récupère le controller Enclosure controller
+            enclosureController.setZoo(zoo);
+
+            enclosureController.setData(buttonText); // cette fonction est juste un setter qui permet de récupérer le texte se trouvant sur le bouton sur lequel on a cliqué
+
+            Scene currentScene = ((Node) actionEvent.getSource()).getScene();
+            Scene newScene = new Scene(root);
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(newScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(zoo.getEnclosureWithButton(button).getName());
         zoo.getEnclosureWithButton(button).showCreatures();
     }

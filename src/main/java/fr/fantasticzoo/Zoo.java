@@ -103,4 +103,13 @@ public class Zoo {
     public ObservableMap<Enclosure, Node> getObservableEnclosureMap() {
         return observableEnclosureMap;
     }
+
+    public Enclosure getEnclosureByName(String enclosureName) {
+        for (Enclosure enclosure : enclosures) {
+            if (enclosure != null && enclosure.getName().equals(enclosureName)) {
+                return enclosure;
+            }
+        }
+        return null;
+    }
 }
