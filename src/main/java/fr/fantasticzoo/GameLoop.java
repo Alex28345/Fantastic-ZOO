@@ -14,45 +14,45 @@ public class GameLoop{
         this.zoo = Zoo.getInstance();
         this.jsonParameters = jsonParameters;
     }
-
     public void doLoop() {
 
         this.creaturesGrow();
 
         for (Enclosure enclosure : zoo.getEnclosures()) {
-            int randomForEnclosures = new Random().nextInt(100);
+            if(enclosure == null)
+                return;
+            System.out.println(zoo.getEnclosures().length);
             if (enclosure.getCreatureCount() > 0) {
                 for (Creature creature : enclosure.getCreatures()) {
-                    int randomForCreatures = new Random().nextInt(100);
                     if (!enclosure.getCleanliness()) {
-                        if (randomForCreatures < jsonParameters.getInt("sickProbability") *1.5) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("sickProbability") *1.5) {
                             creature.setSick(true);
                             System.out.println(creature.getName() + " est malade");
                         }
-                        if (randomForCreatures < jsonParameters.getInt("sleepProbability") / 1.5) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("sleepProbability") / 1.5) {
                             creature.setSleeping(true);
                             System.out.println(creature.getName() + " dort");
                         }
-                        if (randomForCreatures < jsonParameters.getInt("hungerProbability") * 1.5) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("hungerProbability") * 1.5) {
                             creature.setHungry(true);
                             System.out.println(creature.getName() + " a faim");
                         }
                     } else {
-                        if (randomForCreatures < jsonParameters.getInt("sickProbability")) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("sickProbability")) {
                             creature.setSick(true);
                             System.out.println(creature.getName() + " est malade");
                         }
-                        if (randomForCreatures < jsonParameters.getInt("sleepProbability")) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("sleepProbability")) {
                             creature.setSleeping(true);
                             System.out.println(creature.getName() + " dort");
                         }
-                        if (randomForCreatures < jsonParameters.getInt("hungerProbability")) {
+                        if (new Random().nextInt(100) < jsonParameters.getInt("hungerProbability")) {
                             creature.setHungry(true);
                             System.out.println(creature.getName() + " a faim");
                         }
                     }
                 }
-                if (randomForEnclosures < jsonParameters.getInt("cleanProbability")) {
+                if (new Random().nextInt(100) < jsonParameters.getInt("cleanProbability")) {
                     enclosure.setCleanliness(false);
                 }
             }

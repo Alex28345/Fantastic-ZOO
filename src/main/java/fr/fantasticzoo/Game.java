@@ -24,7 +24,6 @@ public class Game implements Runnable{
         gameLoop = new GameLoop(jsonParameters);
     }
 
-
     public void run() {
         TimerTask task = new TimerTask() {
             @Override
@@ -34,7 +33,7 @@ public class Game implements Runnable{
                 i++;
             }
         };
-        timer.schedule(task, 0, 3000);
+        timer.schedule(task, 0, jsonParameters.getInt("timeBetweenTurns"));
     }
 
 

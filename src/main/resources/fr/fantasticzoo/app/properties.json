@@ -1,5 +1,5 @@
 {
-  "iterationSpeed": 3000,
+  "timeBetweenTurns": 2000,
   "sickProbability": 10,
   "sleepProbability": 10,
   "hungerProbability": 10,
