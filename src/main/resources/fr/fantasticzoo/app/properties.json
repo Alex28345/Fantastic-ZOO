@@ -1,0 +1,7 @@
+{
+  "iterationSpeed": 3000,
+  "sickProbability": 10,
+  "sleepProbability": 10,
+  "hungerProbability": 10,
+  "cleanProbability": 10
+}

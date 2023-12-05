@@ -11,6 +11,7 @@ import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -93,8 +94,8 @@ public class Zoo {
         return enclosures;
     }
 
-    public void start() {
-        Game game = new Game(this);
+    public void start() throws FileNotFoundException {
+        Game game = new Game();
         Thread gameThread = new Thread(game);
         gameThread.start();
     };

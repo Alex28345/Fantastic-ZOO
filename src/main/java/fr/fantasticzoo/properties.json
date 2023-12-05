@@ -1,6 +1,0 @@
-{
-  "iterationSpeed": 3000 //temps entre 2 iteration du jeu en milisecondes
-  "sickProbability": 10 //probabilité qu'une creature tombe malade en %
-  "sleepProbability": 10 //probabilité qu'une creature s'endorme en %
-  "hungerProbability": 10 //probabilité qu'une creature ait faim en %
-}
