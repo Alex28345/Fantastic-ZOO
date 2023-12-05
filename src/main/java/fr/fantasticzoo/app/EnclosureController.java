@@ -101,12 +101,12 @@ public class EnclosureController {
                 Label creatureLabel = new Label(creature.getName() + " : ");
                 gridPane.add(creatureLabel, 0, rowIndex);
 
-                Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.getHealth()));
+                Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.isSick()));
                 age.setText(String.valueOf(creature.getAge()));
                 gender.setText(String.valueOf(creature.getSex()));
                 weight.setText(String.valueOf(creature.getWeight()));
                 height.setText(String.valueOf(creature.getHeight()));
-                health.setText(String.valueOf(creature.getHealth()));
+                health.setText(String.valueOf(creature.isSick()));
 
                 gridPane.add(age, rowIndex,1);
                 gridPane.add(gender, rowIndex, 2);
@@ -208,11 +208,10 @@ public class EnclosureController {
 
         if (enclosure != null){
             enclosure.clean();
-            enclosure.setCleanliness();
+            enclosure.setCleanliness(true);
             Label isCleanLabel = new Label("L'enclos a été nettoyé !");
             actions.getChildren().add(isCleanLabel);
         }
-
         else {
             Label notFoundLabel = new Label("L'enclos n'a pas été trouvé !");
             actions.getChildren().add(notFoundLabel);

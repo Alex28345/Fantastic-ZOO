@@ -88,9 +88,8 @@ public class Enclosure {
      }
 
      public boolean getCleanliness(){ return cleanliness; }
-
-     public void setCleanliness(){
-         this.cleanliness = true;
+    public void setCleanliness(boolean cleanliness) {
+        this.cleanliness = cleanliness;
      }
 
      public String getCleanlinessToString(){
@@ -144,4 +143,5 @@ public class Enclosure {
         this.addCreaturesName();
          return creaturesNames;
     }
+
 }

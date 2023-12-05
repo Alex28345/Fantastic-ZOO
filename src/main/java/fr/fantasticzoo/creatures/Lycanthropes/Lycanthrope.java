@@ -32,7 +32,7 @@ public class Lycanthrope extends Viviparous implements Runner {
                 ", age=" + age +
                 ", isHungry=" + isHungry +
                 ", isSleeping=" + isSleeping +
-                ", health=" + health +
+                ", health=" + isSick +
                 '}';
     }
     @Override
@@ -78,7 +78,7 @@ public class Lycanthrope extends Viviparous implements Runner {
 
     //Les lycanthropes ω sont des lycanthropes adultes considérés comme ayant une force insuffisante par rapport à la moyenne du groupe.
     public boolean isOmega(){
-        if(this.getSex() == Sex.male && this.getAge() == Age.adult && this.getStrength() < pack.averageStrength){
+        if(this.getSex() == Sex.male && this.getAge() > 40 && this.getStrength() < pack.averageStrength){
             this.setRankDomination(DominationRank.ω);
             return true;
         }

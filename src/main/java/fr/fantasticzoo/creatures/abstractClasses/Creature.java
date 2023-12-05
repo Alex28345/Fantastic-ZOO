@@ -21,12 +21,6 @@ public abstract class Creature {
     public void heal(){
         System.out.println("I'm healing");
     }
-    public void sleep(){
-        System.out.println("I'm sleeping");
-    }
-    public void wakeUp(){
-        System.out.println("I'm waking up");
-    }
     public void age(){
         System.out.println("I'm aging");
     }
