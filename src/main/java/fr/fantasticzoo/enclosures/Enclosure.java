@@ -53,7 +53,7 @@ public class Enclosure {
         this.creatures.get(this.creatures.indexOf(creature)).feed();
      }
      public void clean(){
-        if(getCleanliness() == false){
+        if(!getCleanliness()){
             this.cleanliness = true;
             System.out.println(this.getName() + " est nettoyé");
         }
@@ -94,5 +94,8 @@ public class Enclosure {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public void setCleanliness(boolean cleanliness) {
+        this.cleanliness = cleanliness;
     }
 }

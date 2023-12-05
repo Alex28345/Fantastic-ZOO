@@ -3,10 +3,13 @@ package fr.fantasticzoo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.enclosures.Enclosure;
 import javafx.fxml.FXML;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;
@@ -37,24 +40,45 @@ public class Game implements Runnable{
             public void run() {
                 System.out.println("temps : " + i);
                 this.creaturesGrow();
-                int random = new Random().nextInt(100);
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    creaturesSick(new Random().nextInt(rootNode.get("sickMaxCount").asInt()));
-                }
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    System.out.println("Un animal est né");
-                }
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    System.out.println("Un animal est né");
-                }
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    System.out.println("Un animal est né");
-                }
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    System.out.println("Un animal est né");
-                }
-                if (random < rootNode.get("sickProbalility").asInt()) {
-                    System.out.println("Un animal est né");
+
+
+                for(Enclosure enclosure : zoo.getEnclosures()) {
+                    int randomForEnclosures = new Random().nextInt(100);
+                    if(enclosure.getCreatureCount() > 0){
+                        for(Creature creature : enclosure.getCreatures()) {
+                            int randomForCreatures = new Random().nextInt(100);
+                            if(!enclosure.getCleanliness()) {
+                                if (randomForCreatures < rootNode.get("sickProbability").asInt()*1.5) {
+                                    creature.setSick(true);
+                                    System.out.println(creature.getName() + " est malade");
+                                }
+                                if (randomForCreatures < rootNode.get("sleepProbability").asInt()/1.5) {
+                                    creature.setSleeping(true);
+                                    System.out.println(creature.getName() + " dort");
+                                }
+                                if (randomForCreatures < rootNode.get("hungerProbability").asInt()*1.5) {
+                                    creature.setHungry(true);
+                                    System.out.println(creature.getName() + " a faim");
+                                }
+                            } else {
+                                if (randomForCreatures < rootNode.get("sickProbability").asInt()) {
+                                    creature.setSick(true);
+                                    System.out.println(creature.getName() + " est malade");
+                                }
+                                if (randomForCreatures < rootNode.get("sleepProbability").asInt()) {
+                                    creature.setSleeping(true);
+                                    System.out.println(creature.getName() + " dort");
+                                }
+                                if (randomForCreatures < rootNode.get("hungerProbability").asInt()) {
+                                    creature.setHungry(true);
+                                    System.out.println(creature.getName() + " a faim");
+                                }
+                            }
+                        }
+                        if (randomForEnclosures < rootNode.get("cleanProbalility").asInt()) {
+                            enclosure.setCleanliness(false);
+                        }
+                    }
                 }
 
 
@@ -66,14 +90,7 @@ public class Game implements Runnable{
                 }
             }
 
-            public void creaturesSick(int creatureSickCount){
-                for(int i = 0; i < creatureSickCount; i++){
-                    int random = new Random().nextInt(zoo.getCreatures().length);
-                    if(!zoo.getCreatures()[random].isSick()){
-                        zoo.getCreatures()[random].setSick(true);
-                    }
-                }
-            }
+
         };
         timer.schedule(task, 0, 3000);
     }
