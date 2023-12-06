@@ -68,6 +68,8 @@ public class EnclosureController<T extends AbstractCreature> {
     private Label height = new Label("Hauteur");
     private Label health = new Label("Santé");
 
+    @FXML
+    VBox creaturesName;
 
     public void setData(Enclosure<T> buttonStandardEnclosure) {
         this.enclosure = buttonStandardEnclosure;
@@ -83,36 +85,40 @@ public class EnclosureController<T extends AbstractCreature> {
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
 
-        gridPane.add(name, 0, 0);
-        gridPane.add(age, 1, 0);
-        gridPane.add(gender, 2, 0);
-        gridPane.add(weight, 3, 0);
-        gridPane.add(height, 4, 0);
-        gridPane.add(health, 5, 0);
-
         int rowIndex = 1;
 
-        for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
-            if (abstractCreature != null) {
-                Label creatureLabel = new Label(abstractCreature.getName() + " : ");
+        for (AbstractCreature creature : this.enclosure.getCreatures()){
+            Button creatureShow = new Button(creature.getName());
+            creaturesName.getChildren().add(creatureShow);
+            creatureShow.setOnAction(this::showCreatureInfo);
+        }
+
+        for (AbstractCreature creature : this.enclosure.getCreatures()) {
+            if (creature != null) {
+                Label creatureLabel = new Label(creature.getName() + " : ");
                 gridPane.add(creatureLabel, 0, rowIndex);
 
-                Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.isSick()));
                 age.setText(String.valueOf(creature.getAge()));
                 gender.setText(String.valueOf(creature.getSex()));
                 weight.setText(String.valueOf(creature.getWeight()));
                 height.setText(String.valueOf(creature.getHeight()));
                 health.setText(String.valueOf(creature.isSick()));
 
-                gridPane.add(age, rowIndex,1);
-                gridPane.add(gender, rowIndex, 2);
-                gridPane.add(weight, rowIndex, 3);
-                gridPane.add(height, rowIndex, 4);
-                gridPane.add(health, rowIndex, 5);
+                gridPane.add(age, 1, rowIndex);
+                gridPane.add(gender, 2, rowIndex);
+                gridPane.add(weight, 3, rowIndex);
+                gridPane.add(height, 4, rowIndex);
+                gridPane.add(health, 5, rowIndex);
 
                 rowIndex++;
+            } else {
+                System.out.println("Il n'y a pas de créatures");
             }
         }
+    }
+
+    private void showCreatureInfo(ActionEvent actionEvent) {
+
     }
 
     @FXML
@@ -187,10 +193,11 @@ public class EnclosureController<T extends AbstractCreature> {
                 if (this.enclosure.getCreaturesProperty() != null) {
                     for (AbstractCreature abstractCreature : this.enclosure.getCreaturesProperty()) {
                         if (abstractCreature != null && abstractCreature.getName().equals(creatureName)) {
-//                            this.enclosure.removeCreatures();
+                            this.enclosure.removeCreatures((T) abstractCreature);
                             //System.out.println(enclosure.showCreatures());
                             Label creatureLabel = new Label("Créature retirée : " + creatureName);
                             actions.getChildren().add(creatureLabel);
+//                            gridPane.getChildren().remove();
                             textField.clear();
                             return;
                         }

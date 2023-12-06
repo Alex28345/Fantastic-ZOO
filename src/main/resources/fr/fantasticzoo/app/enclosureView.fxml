@@ -19,6 +19,14 @@
             </HBox>
         </VBox>
     </top>
+    <left>
+        <VBox alignment="CENTER" spacing="20">
+            <Label fx:id="creaturesTitle" text="Créatures"/>
+            <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
+            </VBox>
+        </VBox>
+    </left>
+
 
     <right>
         <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
