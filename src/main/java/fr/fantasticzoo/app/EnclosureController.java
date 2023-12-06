@@ -28,11 +28,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class EnclosureController<T extends AbstractCreature> {
     private Zoo zoo;
     private Enclosure<T> enclosure;
-    private AbstractCreature creature;
 
     public void setZoo(Zoo zoo) { this.zoo = zoo; }
     private Button newButton = new Button();
@@ -60,18 +60,18 @@ public class EnclosureController<T extends AbstractCreature> {
 
     private Label label = new Label("");
 
-    @FXML
-    GridPane gridPane = new GridPane();
-
-    private Label name = new Label("Nom");
-    private Label age = new Label("Age");
-    private Label gender = new Label("Sexe");
-    private Label weight = new Label("Poids");
-    private Label height = new Label("Hauteur");
-    private Label health = new Label("Santé");
+    private Label age = new Label("Age : ");
+    private Label gender = new Label("Sexe : ");
+    private Label weight = new Label("Poids : ");
+    private Label height = new Label("Hauteur : ");
+    private Label health = new Label("Etat de santé : ");
 
     @FXML
     VBox creaturesName;
+    @FXML
+    VBox creatureInfo;
+    @FXML
+    Label creatureLabel;
 
     public void setData(Enclosure<T> buttonStandardEnclosure) {
         this.enclosure = buttonStandardEnclosure;
@@ -87,13 +87,6 @@ public class EnclosureController<T extends AbstractCreature> {
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
 
-        //int rowIndex = 1;
-
-        for (AbstractCreature creature : this.enclosure.getCreatures()) {
-            Button creatureShow = new Button(creature.getName());
-            creaturesName.getChildren().add(creatureShow);
-            creatureShow.setOnAction(this::creatureButtonAction);
-        }
 
         for(Node b : this.enclosure.getObservableCreatureMap().values()){
             if (b instanceof Button button) {
@@ -104,7 +97,7 @@ public class EnclosureController<T extends AbstractCreature> {
         this.enclosure.getObservableCreatureMap().addListener((MapChangeListener<AbstractCreature, Node>) change -> {
             if (change.wasAdded()) {
                 // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
-                if(change.getValueAdded() instanceof Button button){
+                if (change.getValueAdded() instanceof Button button) {
                     button.setOnAction(this::creatureButtonAction);
                     creaturesName.getChildren().add(button);
                 }
@@ -113,33 +106,29 @@ public class EnclosureController<T extends AbstractCreature> {
                 creaturesName.getChildren().remove(change.getValueRemoved());
             }
         });
-
-        /*for (AbstractCreature creature : this.enclosure.getCreatures()) {
-            if (creature != null) {
-                Label creatureLabel = new Label(creature.getName() + " : ");
-                gridPane.add(creatureLabel, 0, rowIndex);
-
-                age.setText(String.valueOf(creature.getAge()));
-                gender.setText(String.valueOf(creature.getSex()));
-                weight.setText(String.valueOf(creature.getWeight()));
-                height.setText(String.valueOf(creature.getHeight()));
-                health.setText(String.valueOf(creature.isSick()));
-
-                gridPane.add(age, 1, rowIndex);
-                gridPane.add(gender, 2, rowIndex);
-                gridPane.add(weight, 3, rowIndex);
-                gridPane.add(height, 4, rowIndex);
-                gridPane.add(health, 5, rowIndex);
-
-                rowIndex++;
-            } else {
-                System.out.println("Il n'y a pas de créatures");
-            }
-        }*/
     }
 
     private void creatureButtonAction(ActionEvent actionEvent) {
+        creatureInfo.getChildren().clear();
+        Button clickedButton = (Button) actionEvent.getSource();
 
+        // On parcourt la Map observable pour trouver la créature associée au bouton
+        for (Map.Entry<AbstractCreature, Node> entry : this.enclosure.getObservableCreatureMap().entrySet()) {
+            if(entry.getValue() instanceof Button && entry.getValue() == clickedButton){
+                AbstractCreature clickedCreature = entry.getKey();
+
+                age.setText("Age : " + clickedCreature.getAge());
+                gender.setText("Genre : " + clickedCreature.getSex());
+                weight.setText("Poids : " + clickedCreature.getWeight());
+                height.setText("Hauteur : " + clickedCreature.getHeight());
+                health.setText("Etat de santé : " + clickedCreature.isSick());
+
+                creatureLabel.setText("Informations sur " + clickedCreature.getName());
+
+                creatureInfo.getChildren().addAll(creatureLabel,age,gender,weight,height,health);
+                break;
+            }
+        }
     }
 
     /*private void showCreatureInfo(ActionEvent actionEvent) {
@@ -151,6 +140,7 @@ public class EnclosureController<T extends AbstractCreature> {
 
     @FXML
     public void addCreature(ActionEvent actionEvent){
+        creatureInfo.getChildren().clear();
         actions.getChildren().removeAll(actions.getChildren());
 
         //zone infos de la créature à ajouter
@@ -182,6 +172,8 @@ public class EnclosureController<T extends AbstractCreature> {
         actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, ageLabelAdd, ageChoicBox, genderLabelAdd,
         genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox, addButton);
 
+        creatureInfo.getChildren().add(actions);
+
        /* if (NameTextFieldAdd.getText() != null && ageChoicBox.getValue() != null && genderChoicBox.getValue() != null &&
                 weightTextFieldAdd.getText() != null && heightTextFieldAdd.getText() != null && healthChoicBox.getValue() != null){
             addButton.setDisable(false);
@@ -202,7 +194,7 @@ public class EnclosureController<T extends AbstractCreature> {
             Label creatureHeightLabel = new Label(creatureHeight);
             Label creatureHealthLabel = new Label(creatureHealth);
 
-            gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
+            //gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
         });
     }
 

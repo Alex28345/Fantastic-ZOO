@@ -6,7 +6,7 @@
     -fx-font-size: 25px;
 }
 
-#creaturesTitle, #creaturesLabel{
+#creaturesTitle, #creatureLabel{
     -fx-font-size: 20px;
 }
 
@@ -15,7 +15,7 @@
     -fx-wrap-text: wrap;
 }
 
-#creaturesName, #enclosureActions, #creaturesInfo, #menuBtn{
+#creaturesName, #enclosureActions, #creatureInfo, #menuBtn{
     -fx-padding: 10px;
 }
 
