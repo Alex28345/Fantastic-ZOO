@@ -19,12 +19,6 @@
             </HBox>
         </VBox>
     </top>
-    <left>
-
-        <VBox fx:id="creaturesName" alignment="CENTER" spacing="20">
-            <Label fx:id="creaturesTitle" text="Créatures"/>
-        </VBox>
-    </left>
 
     <right>
         <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
@@ -34,6 +28,7 @@
             <Button text="Entretenir" onAction="#cleanEnclosure"/>
         </VBox>
     </right>
+
     <center>
         <VBox spacing="20" alignment="CENTER">
             <VBox fx:id="creaturesInfo" alignment="CENTER">

@@ -51,15 +51,10 @@ public class EnclosureController<T extends AbstractCreature> {
     Label enclosureCleanliness;
 
     @FXML
-    VBox creaturesName;
-    @FXML
     VBox creaturesInfo;
 
     @FXML
     VBox actions;
-
-
-    private String creatures;
 
     private Label label = new Label("");
 
@@ -82,19 +77,11 @@ public class EnclosureController<T extends AbstractCreature> {
         enclosureName.setText(label.getText());
         System.out.println(this.enclosure);
 
-
-
         //informations de l'enclos
         enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
         enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
-
-        ArrayList<String> creatureName = new ArrayList<>(this.enclosure.getCreaturesNames());
-        for (String name : creatureName) {
-            Label creatureShow = new Label(name);
-            creaturesName.getChildren().add(creatureShow);
-        }
 
         gridPane.add(name, 0, 0);
         gridPane.add(age, 1, 0);
@@ -158,8 +145,6 @@ public class EnclosureController<T extends AbstractCreature> {
         Button addButton = new Button("Ajouter la créature");
         addButton.setDisable(false);
 
-
-
         actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, ageLabelAdd, ageChoicBox, genderLabelAdd,
         genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox, addButton);
 
@@ -184,7 +169,6 @@ public class EnclosureController<T extends AbstractCreature> {
             Label creatureHealthLabel = new Label(creatureHealth);
 
             gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
-
         });
     }
 
