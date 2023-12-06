@@ -4,16 +4,13 @@ import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.enclosures.Aquarium;
 import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enclosures.StandardEnclosure;
 import fr.fantasticzoo.enums.EnclosureType;
-import javafx.beans.binding.Bindings;
 import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,9 +24,6 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     private Zoo zoo;
     private final int i = 0;
-    public void setZoo(Zoo zoo) {
-        this.zoo = zoo;
-    }
 
     @FXML
     private Label welcomeText;
@@ -40,15 +34,11 @@ public class Controller implements Initializable {
     private FlowPane enclosures;
     @FXML
     public void createEnclosure() {
-        Enclosure enclosure = switch (selectedCreature.getValue().toString()) {
-            case "Vivarium" -> new Enclosure("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100);
-            case "Aquarium" -> new Aquarium("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100);
-            case "Volière" -> new Aviary("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100);
-            default -> null;
+        switch (selectedCreature.getValue().toString()) {
+            case "Vivarium" -> this.zoo.addEnclosure(new StandardEnclosure<>("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100));
+            case "Aquarium" -> this.zoo.addEnclosure(new Aquarium<>("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100));
+            case "Volière" -> this.zoo.addEnclosure(new Aviary<>("Enclos de type : " + selectedCreature.getValue().toString(), 100, 100, 100));
         };
-        if(enclosure != null){
-            this.zoo.addEnclosure(enclosure);
-        }
     }
 
     @Override
@@ -65,7 +55,7 @@ public class Controller implements Initializable {
                 enclosures.getChildren().add(button);
             }
         }
-        zoo.getObservableEnclosureMap().addListener((MapChangeListener<Enclosure, Node>) change -> {
+        zoo.getObservableEnclosureMap().addListener((MapChangeListener<Enclosure<?>, Node>) change -> {
             if (change.wasAdded()) {
                 // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
                 if(change.getValueAdded() instanceof Button button){

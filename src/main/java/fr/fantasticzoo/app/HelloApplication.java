@@ -3,7 +3,7 @@ package fr.fantasticzoo.app;
 import fr.fantasticzoo.FantasticZooMaster;
 import fr.fantasticzoo.Game;
 import fr.fantasticzoo.Zoo;
-import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enclosures.StandardEnclosure;
 import fr.fantasticzoo.enums.Sex;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,18 +20,18 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Zoo zoo = Zoo.getInstance("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
 
-        Enclosure enclosure = new Enclosure("Enclos de Dragons", 100, 100);
-        enclosure.addCreatures(createDragon("stormFly"));
-        enclosure.addCreatures(createDragon("Thornado"));
-        enclosure.addCreatures(createDragon("Toothless"));
+        StandardEnclosure standardEnclosure = new StandardEnclosure("Enclos de Dragons", 100, 100);
+        standardEnclosure.addCreatures(createDragon("stormFly"));
+        standardEnclosure.addCreatures(createDragon("Thornado"));
+        standardEnclosure.addCreatures(createDragon("Toothless"));
 
-        Enclosure enclosure1 = new Enclosure("Enclos de Nymphes", 100, 60);
-        enclosure1.addCreatures(createNymph("Azra"));
-        enclosure1.addCreatures(createNymph("Barde"));
-        enclosure1.addCreatures(createNymph("Tieffelin"));
+        StandardEnclosure standardEnclosure1 = new StandardEnclosure("Enclos de Nymphes", 100, 60);
+        standardEnclosure1.addCreatures(createNymph("Azra"));
+        standardEnclosure1.addCreatures(createNymph("Barde"));
+        standardEnclosure1.addCreatures(createNymph("Tieffelin"));
 
-        zoo.addEnclosure(enclosure);
-        zoo.addEnclosure(enclosure1);
+        zoo.addEnclosure(standardEnclosure);
+        zoo.addEnclosure(standardEnclosure1);
 
         Game game = new Game();
         Thread gameThread = new Thread(game);

@@ -1,10 +1,11 @@
 package fr.fantasticzoo;
 
-import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enclosures.StandardEnclosure;
 
 import javax.json.JsonObject;
-import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class GameLoop{
@@ -18,11 +19,11 @@ public class GameLoop{
 
         this.creaturesGrow();
 
-        for (Enclosure enclosure : zoo.getEnclosures()) {
+        for (Enclosure<?> enclosure : zoo.getEnclosures()) {
             if(enclosure == null)
                 return;
             if (enclosure.getCreatureCount() > 0) {
-                for (Creature creature : enclosure.getCreatures()) {
+                for (AbstractCreature creature : enclosure.getCreatures()) {
 //                    if (!enclosure.getCleanliness()) {
 //                        if (new Random().nextInt(100) < jsonParameters.getInt("sickProbability") *1.5) {
 //                            creature.setSick(true);
@@ -58,7 +59,7 @@ public class GameLoop{
         }
     }
     private void creaturesGrow(){
-        for (Creature creature : this.zoo.getCreatures()) {
+        for (AbstractCreature creature : this.zoo.getCreatures()) {
             creature.setAge(creature.getAge() + 1);
         }
     }

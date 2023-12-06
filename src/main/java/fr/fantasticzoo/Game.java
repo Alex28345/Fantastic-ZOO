@@ -1,15 +1,11 @@
 package fr.fantasticzoo;
 
-import fr.fantasticzoo.creatures.abstractClasses.Creature;
-import fr.fantasticzoo.enclosures.Enclosure;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 

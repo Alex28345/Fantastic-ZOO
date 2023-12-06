@@ -1,12 +1,10 @@
 package fr.fantasticzoo.enclosures;
 
-import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Flyer;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
 
-import java.util.ArrayList;
-
-public class Aviary extends Enclosure{
+public class Aviary<T extends AbstractCreature & Flyer> extends Enclosure<T> {
     private int height;
 
 
@@ -16,8 +14,8 @@ public class Aviary extends Enclosure{
     }
 
     @Override
-    public void addCreatures(Creature creature) {
-        if (creature instanceof Flyer){
+    public void addCreatures(T creature) {
+        if (creature != null){
             super.addCreatures(creature);
         }
         else{
