@@ -4,6 +4,11 @@ import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enclosures.StandardEnclosure;
+import fr.fantasticzoo.enums.Age;
+import fr.fantasticzoo.enums.Sex;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -23,6 +29,8 @@ import java.util.ArrayList;
 
 public class EnclosureController<T extends AbstractCreature> {
     private Zoo zoo;
+    private Enclosure<T> enclosure;
+    private AbstractCreature creature;
 
     public void setZoo(Zoo zoo) { this.zoo = zoo; }
     private Button newButton = new Button();
@@ -102,12 +110,12 @@ public class EnclosureController<T extends AbstractCreature> {
                 Label creatureLabel = new Label(abstractCreature.getName() + " : ");
                 gridPane.add(creatureLabel, 0, rowIndex);
 
-                Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.getHealth()));
+                Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.isSick()));
                 age.setText(String.valueOf(creature.getAge()));
                 gender.setText(String.valueOf(creature.getSex()));
                 weight.setText(String.valueOf(creature.getWeight()));
                 height.setText(String.valueOf(creature.getHeight()));
-                health.setText(String.valueOf(creature.getHealth()));
+                health.setText(String.valueOf(creature.isSick()));
 
                 gridPane.add(age, rowIndex,1);
                 gridPane.add(gender, rowIndex, 2);
@@ -122,8 +130,6 @@ public class EnclosureController<T extends AbstractCreature> {
 
     @FXML
     public void addCreature(ActionEvent actionEvent){
-        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label.getText()));
-
         actions.getChildren().removeAll(actions.getChildren());
 
         //zone infos de la créature à ajouter
@@ -147,35 +153,47 @@ public class EnclosureController<T extends AbstractCreature> {
         Label healthLabelAdd = new Label("Choissiez la santé de la créature à ajouter");
         ObservableList<String> healthList = FXCollections.observableArrayList("Mauvais", "Bon");
         ComboBox healthChoicBox = new ComboBox(healthList);
+        //
+
+        Button addButton = new Button("Ajouter la créature");
+        addButton.setDisable(false);
+
 
 
         actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, ageLabelAdd, ageChoicBox, genderLabelAdd,
-        genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox);
+        genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox, addButton);
 
-        Button addButton = newButton("Ajouter la créature");
+       /* if (NameTextFieldAdd.getText() != null && ageChoicBox.getValue() != null && genderChoicBox.getValue() != null &&
+                weightTextFieldAdd.getText() != null && heightTextFieldAdd.getText() != null && healthChoicBox.getValue() != null){
+            addButton.setDisable(false);
+        }*/
         //
 
-        textField.setOnKeyPressed(event -> {
+
+        addButton.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
 
-                String creatureName = textField.getText(); //On récupère le nom de la r=créature dans le textField
-//                Creature newCreature = new Creature(creatureName);
-//                enclosure.addCreatures(newCreature);
+                String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
+                String creatureAge = ageChoicBox.getValue().toString();
+                String creatureGender = genderChoicBox.getValue().toString();
+                String creatureWeight = weightTextFieldAdd.getText();
+                String creatureHeight = heightTextFieldAdd.getText();
+                String creatureHealth = healthChoicBox.getValue().toString();
 
-                Label creatureLabel = new Label(creatureName);
-                Label creatureage = new Label("4");
+                Label creatureNameLabel = new Label(creatureName);
+                Label creatureageAgeLabel = new Label(creatureAge);
+                Label creatureageGenderLabel = new Label(creatureGender);
+                Label creatureWeightLabel = new Label(creatureWeight);
+                Label creatureHeightLabel = new Label(creatureHeight);
+                Label creatureHealthLabel = new Label(creatureHealth);
 
-                actions.getChildren().add(creatureLabel);
-                creaturesName.getChildren().add(creatureLabel);
-                gridPane.addRow(gridPane.getRowCount(), creatureLabel, creatureage);
-                textField.clear();
+                gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
             }
         });
     }
 
     @FXML
     public  void removeCreature(ActionEvent actionEvent){
-        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label.getText()));
 
         actions.getChildren().removeAll(actions.getChildren());
 
@@ -221,7 +239,6 @@ public class EnclosureController<T extends AbstractCreature> {
 
     @FXML
     public void cleanEnclosure(ActionEvent actionEvent){
-        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label.getText()));
 
         actions.getChildren().removeAll(actions.getChildren());
 
