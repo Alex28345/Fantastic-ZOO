@@ -131,13 +131,6 @@ public class EnclosureController<T extends AbstractCreature> {
         }
     }
 
-    /*private void showCreatureInfo(ActionEvent actionEvent) {
-        Button clickedButton = (Button) actionEvent.getSource();
-        String buttonText = clickedButton.getText();
-        Label creaturesLabel = new Label("Information sur" + buttonText);
-
-    }*/
-
     @FXML
     public void addCreature(ActionEvent actionEvent){
         creatureInfo.getChildren().clear();
@@ -235,10 +228,9 @@ public class EnclosureController<T extends AbstractCreature> {
     }
     @FXML
     public void feedCreatures(ActionEvent actionEvent){
-        ArrayList<T> creatureList = (ArrayList<T>) this.enclosure.getCreatures();
         actions.getChildren().removeAll(actions.getChildren());
-        for (T creature : creatureList) {
-            creature.feed();
+        for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
+            abstractCreature.feed();
         }
         Label areFeededLabel = new Label("Les créatures ont été nourrits !");
         actions.getChildren().add(areFeededLabel);
