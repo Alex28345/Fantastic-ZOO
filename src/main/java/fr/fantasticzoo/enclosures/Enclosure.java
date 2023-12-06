@@ -5,8 +5,14 @@ import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class Enclosure<T extends AbstractCreature> {
     private String name; //nom de l'enclos
@@ -14,28 +20,26 @@ public abstract class Enclosure<T extends AbstractCreature> {
     private int surface; //surface en m²
     private int capacity; //nombre de créatures max
     private int creatureCount; //nombre de créatures
-    private ArrayList<T> creatures; //liste des cratures présentes
     private boolean cleanliness; //propreté
-    private ArrayList<String> creaturesNames = new ArrayList<String>();
-    private SimpleListProperty<T> creaturesProperty;
+
+    private ObservableMap<AbstractCreature, Node> observableCreatureMap;
 
     public Enclosure(String name, int surface, int capacity) {
         this.name = name;
         this.surface = surface;
         this.capacity = capacity;
-        this.creatures = new ArrayList<T>(capacity);
         this.creatureCount = 0;
         this.cleanliness = true;
-        this.creaturesProperty = new SimpleListProperty<>(FXCollections.observableList(creatures));
+        this.observableCreatureMap = FXCollections.observableMap(new HashMap<AbstractCreature, Node>());
     }
 
     public void addCreatures(T creature) {
         if (this.CREATURE_TYPE == null)
             this.CREATURE_TYPE = creature.getClass().toString();
         if(creature.getClass().toString().equals(CREATURE_TYPE)) {
-            if(creatures.size() < capacity){
-                if (!creatures.contains(creature) ) {
-                    this.creatures.add(creature);
+            if(this.getCreatures().size() < capacity){
+                if (!this.getCreatures().contains(creature) ) {
+                    observableCreatureMap.put(creature, new Button(creature.getName()));
                     creatureCount++;
                     return;
                 }else {
@@ -53,26 +57,9 @@ public abstract class Enclosure<T extends AbstractCreature> {
     }
 
     public void removeCreatures(T creature){
-        this.creatures.remove(creature);
+        this.getCreatures().remove(creature);
     }
-    /*Supprimme la dernière créature*/
-    public void removeCreature(){
-        this.creatures.remove(creatures.size()-1);
-    }
-    public void feedCreatures(T creature){
-        if (creature != null){
-            int index = creatures.indexOf(creature);
-            if (index >= 0 && index < creatures.size()) {
-                creatures.get(index).feed();
-            }
-            else{
-                System.out.println("La créature n'a pas été touvée...");
-            }
-        }
-        else{
-            System.out.println("Pas de créature dans la liste");
-        }
-    }
+
 
     public void clean(){
         if (!getCleanliness()) {
@@ -102,44 +89,21 @@ public abstract class Enclosure<T extends AbstractCreature> {
 
     public int getCapacity(){ return capacity; }
 
-    public String showCreatures() {
-        StringBuilder creaturesInfo = new StringBuilder();
-        for (T creature : creatures) {
-            if (creature != null) {
-                creaturesInfo.append(creature.getName()).append("\n");
-            }
-        }
-        return creaturesInfo.toString();
-    }
-
     public void setName(String name) { this.name = name; }
 
-    public ArrayList<T> getCreatures() {
-        return creatures;
+    public AbstractCreature getCreatureWithButton(Button button) {
+        return observableCreatureMap.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(button))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
     }
 
-    public ObservableList<T> getCreaturesProperty() {
-        return creaturesProperty.get();
+    public Set<AbstractCreature> getCreatures() {
+        return observableCreatureMap.keySet();
     }
 
-    public SimpleListProperty<T> creaturesProperty() {
-        return creaturesProperty;
-    }
-
-    public void addCreaturesName(){
-        if (creatures != null) {
-            for (T creature : creatures) {
-                if (creature != null) {
-                    creaturesNames.add(creature.getName());
-                }
-            }
-        } else {
-            System.out.println("La liste de créatures est null.");
-        }
-    }
-
-    public  ArrayList<String> getCreaturesNames(){
-        this.addCreaturesName();
-        return creaturesNames;
+    public ObservableMap<AbstractCreature, Node> getObservableCreatureMap() {
+        return observableCreatureMap;
     }
 }

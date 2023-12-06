@@ -6,8 +6,10 @@ import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enclosures.StandardEnclosure;
 import fr.fantasticzoo.enums.Age;
+import fr.fantasticzoo.enums.EnclosureType;
 import fr.fantasticzoo.enums.Sex;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,15 +87,34 @@ public class EnclosureController<T extends AbstractCreature> {
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
 
-        int rowIndex = 1;
-
-        for (AbstractCreature creature : this.enclosure.getCreatures()){
-            Button creatureShow = new Button(creature.getName());
-            creaturesName.getChildren().add(creatureShow);
-            creatureShow.setOnAction(this::showCreatureInfo);
-        }
+        //int rowIndex = 1;
 
         for (AbstractCreature creature : this.enclosure.getCreatures()) {
+            Button creatureShow = new Button(creature.getName());
+            creaturesName.getChildren().add(creatureShow);
+            creatureShow.setOnAction(this::creatureButtonAction);
+        }
+
+        for(Node b : this.enclosure.getObservableCreatureMap().values()){
+            if (b instanceof Button button) {
+                button.setOnAction(this::creatureButtonAction);
+                creaturesName.getChildren().add(button);
+            }
+        }
+        this.enclosure.getObservableCreatureMap().addListener((MapChangeListener<AbstractCreature, Node>) change -> {
+            if (change.wasAdded()) {
+                // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
+                if(change.getValueAdded() instanceof Button button){
+                    button.setOnAction(this::creatureButtonAction);
+                    creaturesName.getChildren().add(button);
+                }
+            } else if (change.wasRemoved()) {
+                // Supprimer le bouton correspondant à chaque suppression dans la map
+                creaturesName.getChildren().remove(change.getValueRemoved());
+            }
+        });
+
+        /*for (AbstractCreature creature : this.enclosure.getCreatures()) {
             if (creature != null) {
                 Label creatureLabel = new Label(creature.getName() + " : ");
                 gridPane.add(creatureLabel, 0, rowIndex);
@@ -114,12 +135,19 @@ public class EnclosureController<T extends AbstractCreature> {
             } else {
                 System.out.println("Il n'y a pas de créatures");
             }
-        }
+        }*/
     }
 
-    private void showCreatureInfo(ActionEvent actionEvent) {
+    private void creatureButtonAction(ActionEvent actionEvent) {
 
     }
+
+    /*private void showCreatureInfo(ActionEvent actionEvent) {
+        Button clickedButton = (Button) actionEvent.getSource();
+        String buttonText = clickedButton.getText();
+        Label creaturesLabel = new Label("Information sur" + buttonText);
+
+    }*/
 
     @FXML
     public void addCreature(ActionEvent actionEvent){
@@ -190,8 +218,8 @@ public class EnclosureController<T extends AbstractCreature> {
         textField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String creatureName = textField.getText();
-                if (this.enclosure.getCreaturesProperty() != null) {
-                    for (AbstractCreature abstractCreature : this.enclosure.getCreaturesProperty()) {
+                if (this.enclosure.getObservableCreatureMap() != null) {
+                    for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
                         if (abstractCreature != null && abstractCreature.getName().equals(creatureName)) {
                             this.enclosure.removeCreatures((T) abstractCreature);
                             //System.out.println(enclosure.showCreatures());
@@ -218,7 +246,7 @@ public class EnclosureController<T extends AbstractCreature> {
         ArrayList<T> creatureList = (ArrayList<T>) this.enclosure.getCreatures();
         actions.getChildren().removeAll(actions.getChildren());
         for (T creature : creatureList) {
-            this.enclosure.feedCreatures(creature);
+            creature.feed();
         }
         Label areFeededLabel = new Label("Les créatures ont été nourrits !");
         actions.getChildren().add(areFeededLabel);

@@ -79,5 +79,6 @@ public class Controller implements Initializable {
         }
         Button b = (Button) actionEvent.getSource();
         controller.setData(zoo.getEnclosureWithButton(b));
+        System.out.println(zoo.getEnclosureWithButton(b).getName());
     }
 }

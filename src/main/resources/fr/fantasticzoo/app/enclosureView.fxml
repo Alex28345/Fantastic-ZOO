@@ -40,7 +40,7 @@
     <center>
         <VBox spacing="20" alignment="CENTER">
             <VBox fx:id="creaturesInfo" alignment="CENTER">
-                <Label fx:id="creaturesLabel" text="Informations sur les créatures"/>
+                <Label fx:id="creaturesLabel" text="Informations sur une créature"/>
                 <GridPane fx:id="gridPane" hgap="15" alignment="CENTER">
                     <Label text="Nom" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <Label text="Age" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
