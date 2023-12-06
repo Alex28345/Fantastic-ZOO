@@ -168,27 +168,23 @@ public class EnclosureController<T extends AbstractCreature> {
             addButton.setDisable(false);
         }*/
         //
+        addButton.setOnAction(event ->{
+            String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
+            String creatureAge = ageChoicBox.getValue().toString();
+            String creatureGender = genderChoicBox.getValue().toString();
+            String creatureWeight = weightTextFieldAdd.getText();
+            String creatureHeight = heightTextFieldAdd.getText();
+            String creatureHealth = healthChoicBox.getValue().toString();
 
+            Label creatureNameLabel = new Label(creatureName);
+            Label creatureageAgeLabel = new Label(creatureAge);
+            Label creatureageGenderLabel = new Label(creatureGender);
+            Label creatureWeightLabel = new Label(creatureWeight);
+            Label creatureHeightLabel = new Label(creatureHeight);
+            Label creatureHealthLabel = new Label(creatureHealth);
 
-        addButton.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+            gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
 
-                String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
-                String creatureAge = ageChoicBox.getValue().toString();
-                String creatureGender = genderChoicBox.getValue().toString();
-                String creatureWeight = weightTextFieldAdd.getText();
-                String creatureHeight = heightTextFieldAdd.getText();
-                String creatureHealth = healthChoicBox.getValue().toString();
-
-                Label creatureNameLabel = new Label(creatureName);
-                Label creatureageAgeLabel = new Label(creatureAge);
-                Label creatureageGenderLabel = new Label(creatureGender);
-                Label creatureWeightLabel = new Label(creatureWeight);
-                Label creatureHeightLabel = new Label(creatureHeight);
-                Label creatureHealthLabel = new Label(creatureHealth);
-
-                gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
-            }
         });
     }
 
