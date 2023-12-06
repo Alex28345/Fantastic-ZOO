@@ -37,8 +37,15 @@
     <center>
         <VBox spacing="20" alignment="CENTER">
             <VBox fx:id="creaturesInfo" alignment="CENTER">
-                <Label fx:id="creaturesLabel" text="Informations sur les créatures"></Label>
-                <GridPane fx:id="gridPane" hgap="15" alignment="CENTER"></GridPane>
+                <Label fx:id="creaturesLabel" text="Informations sur les créatures"/>
+                <GridPane fx:id="gridPane" hgap="15" alignment="CENTER">
+                    <Label text="Nom" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label text="Age" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Sexe" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <Label text="Poids" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    <Label text="Hauteur" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                    <Label text="Santé" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+                </GridPane>
             </VBox>
             <VBox fx:id="actions">
             </VBox>

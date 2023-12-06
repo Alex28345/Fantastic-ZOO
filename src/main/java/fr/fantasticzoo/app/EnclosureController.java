@@ -3,6 +3,10 @@ package fr.fantasticzoo.app;
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.abstractClasses.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
+import fr.fantasticzoo.enums.Age;
+import fr.fantasticzoo.enums.Sex;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -80,20 +85,13 @@ public class EnclosureController {
         enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
+        //
 
         ArrayList<String> creatureName = new ArrayList<>(enclosure.getCreaturesNames());
         for (String name : creatureName) {
             Label creatureShow = new Label(name);
             creaturesName.getChildren().add(creatureShow);
         }
-
-        gridPane.add(name, 0, 0);
-        gridPane.add(age, 1, 0);
-        gridPane.add(gender, 2, 0);
-        gridPane.add(weight, 3, 0);
-        gridPane.add(height, 4, 0);
-        gridPane.add(health, 5, 0);
-
         int rowIndex = 1;
 
         for (Creature creature : enclosure.getCreatures()) {
@@ -107,13 +105,6 @@ public class EnclosureController {
                 weight.setText(String.valueOf(creature.getWeight()));
                 height.setText(String.valueOf(creature.getHeight()));
                 health.setText(String.valueOf(creature.getHealth()));
-
-                gridPane.add(age, rowIndex,1);
-                gridPane.add(gender, rowIndex, 2);
-                gridPane.add(weight, rowIndex, 3);
-                gridPane.add(height, rowIndex, 4);
-                gridPane.add(health, rowIndex, 5);
-
                 rowIndex++;
             }
         }
@@ -125,20 +116,48 @@ public class EnclosureController {
 
         actions.getChildren().removeAll(actions.getChildren());
 
-        Label labelAdd = new Label("Entrez le nom d'une Créature à ajouter");
-        TextField textField = new TextField();
-        actions.getChildren().addAll(labelAdd, textField);
+        //zone infos de la créature à ajouter
+        Label nameLabelAdd = new Label("Entrez le nom d'une Créature à ajouter");
+        TextField NameTextFieldAdd = new TextField();
+
+        Label ageLabelAdd = new Label("Choissiez l'age de la créature à ajouter");
+        ObservableList<Age> ageList = FXCollections.observableArrayList(Age.values());
+        ComboBox ageChoicBox = new ComboBox(ageList);
+
+        Label genderLabelAdd = new Label("Choissiez le sexe de la créature à ajouter");
+        ObservableList<Sex> genderList = FXCollections.observableArrayList(Sex.values());
+        ComboBox genderChoicBox = new ComboBox(genderList);
+
+        Label weightLabelAdd = new Label("Choissiez le poids de la créature à ajouter");
+        TextField weightTextFieldAdd = new TextField();
+
+        Label heightLabelAdd = new Label("Choissiez la hauteur de la créature à ajouter");
+        TextField heightTextFieldAdd = new TextField();
+
+        Label healthLabelAdd = new Label("Choissiez la santé de la créature à ajouter");
+        ObservableList<String> healthList = FXCollections.observableArrayList("Mauvais", "Bon");
+        ComboBox healthChoicBox = new ComboBox(healthList);
+
+
+        actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, ageLabelAdd, ageChoicBox, genderLabelAdd,
+        genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox);
+
+        Button addButton = newButton("Ajouter la créature");
+        //
 
         textField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
 
-                String creatureName = textField.getText();
+                String creatureName = textField.getText(); //On récupère le nom de la r=créature dans le textField
 //                Creature newCreature = new Creature(creatureName);
 //                enclosure.addCreatures(newCreature);
 
-                Label creatureLabel = new Label("Nouvelle créature : " + creatureName);
-                actions.getChildren().add(creatureLabel);
+                Label creatureLabel = new Label(creatureName);
+                Label creatureage = new Label("4");
 
+                actions.getChildren().add(creatureLabel);
+                creaturesName.getChildren().add(creatureLabel);
+                gridPane.addRow(gridPane.getRowCount(), creatureLabel, creatureage);
                 textField.clear();
             }
         });
