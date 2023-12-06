@@ -38,8 +38,6 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
     }
 
-
-
     public DominationRank getRankDomination() { return rankDomination; }
     public void setRankDomination(DominationRank rankDomination) { this.rankDomination = rankDomination; }
 
