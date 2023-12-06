@@ -1,12 +1,9 @@
 package fr.fantasticzoo.app;
 
 import fr.fantasticzoo.Zoo;
-import fr.fantasticzoo.creatures.abstractClasses.Creature;
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
-import fr.fantasticzoo.enums.Age;
-import fr.fantasticzoo.enums.Sex;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -25,14 +21,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class EnclosureController {
+public class EnclosureController<T extends AbstractCreature> {
     private Zoo zoo;
 
     public void setZoo(Zoo zoo) { this.zoo = zoo; }
     private Button newButton = new Button();
 
      //private ArrayList <Enclosure> enclosureList = new ArrayList<Enclosure>(List.of(this.zoo.getEnclosures()));
-     private Enclosure actualEnclosure;
+     private StandardEnclosure actualStandardEnclosure;
 
     //Informations de l'enclos FXML
     @FXML
@@ -70,33 +66,40 @@ public class EnclosureController {
     private Label health = new Label("Santé");
 
 
-    public void setData(String data) {
-        label.setText(data);
-        enclosureName.setText(label.getText());
-
-
-        System.out.println(data);
+    public void setData(Enclosure<T> buttonStandardEnclosure) {
+        this.enclosure = buttonStandardEnclosure;
+        label.setText(this.enclosure.getName());
         this.zoo = Zoo.getInstance();
 
-        Enclosure enclosure = zoo.getEnclosureByName(data);
+        enclosureName.setText(label.getText());
+        System.out.println(this.enclosure);
+
+
 
         //informations de l'enclos
         enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
         enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
         enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
-        //
 
-        ArrayList<String> creatureName = new ArrayList<>(enclosure.getCreaturesNames());
+        ArrayList<String> creatureName = new ArrayList<>(this.enclosure.getCreaturesNames());
         for (String name : creatureName) {
             Label creatureShow = new Label(name);
             creaturesName.getChildren().add(creatureShow);
         }
+
+        gridPane.add(name, 0, 0);
+        gridPane.add(age, 1, 0);
+        gridPane.add(gender, 2, 0);
+        gridPane.add(weight, 3, 0);
+        gridPane.add(height, 4, 0);
+        gridPane.add(health, 5, 0);
+
         int rowIndex = 1;
 
-        for (Creature creature : enclosure.getCreatures()) {
-            if (creature != null) {
-                Label creatureLabel = new Label(creature.getName() + " : ");
+        for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
+            if (abstractCreature != null) {
+                Label creatureLabel = new Label(abstractCreature.getName() + " : ");
                 gridPane.add(creatureLabel, 0, rowIndex);
 
                 Label creatureInfoLabel = new Label(String.valueOf(creature.getAge()  + " " + creature.getSex() + creature.getWeight() + creature.getHeight() + creature.getHealth()));
@@ -105,6 +108,13 @@ public class EnclosureController {
                 weight.setText(String.valueOf(creature.getWeight()));
                 height.setText(String.valueOf(creature.getHeight()));
                 health.setText(String.valueOf(creature.getHealth()));
+
+                gridPane.add(age, rowIndex,1);
+                gridPane.add(gender, rowIndex, 2);
+                gridPane.add(weight, rowIndex, 3);
+                gridPane.add(height, rowIndex, 4);
+                gridPane.add(health, rowIndex, 5);
+
                 rowIndex++;
             }
         }
@@ -176,10 +186,10 @@ public class EnclosureController {
         textField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String creatureName = textField.getText();
-                if (enclosure.getCreaturesProperty() != null) {
-                    for (Creature creature : enclosure.getCreaturesProperty()) {
-                        if (creature != null && creature.getName().equals(creatureName)) {
-                            enclosure.removeCreatures(creature);
+                if (this.enclosure.getCreaturesProperty() != null) {
+                    for (AbstractCreature abstractCreature : this.enclosure.getCreaturesProperty()) {
+                        if (abstractCreature != null && abstractCreature.getName().equals(creatureName)) {
+//                            this.enclosure.removeCreatures();
                             //System.out.println(enclosure.showCreatures());
                             Label creatureLabel = new Label("Créature retirée : " + creatureName);
                             actions.getChildren().add(creatureLabel);
@@ -200,23 +210,13 @@ public class EnclosureController {
     }
     @FXML
     public void feedCreatures(ActionEvent actionEvent){
-        Enclosure enclosure = zoo.getEnclosureByName(String.valueOf(label.getText()));
-        ArrayList <Creature> creatureList = enclosure.getCreatures();
-
+        ArrayList<T> creatureList = (ArrayList<T>) this.enclosure.getCreatures();
         actions.getChildren().removeAll(actions.getChildren());
-
-        if(enclosure != null){
-            for (Creature creature : creatureList) {
-                enclosure.feedCreatures(creature);
-            }
-
-            Label areFeededLabel = new Label("Les créatures ont été nourrits !");
-            actions.getChildren().add(areFeededLabel);
+        for (T creature : creatureList) {
+            this.enclosure.feedCreatures(creature);
         }
-        else {
-            Label notFoundLabel = new Label("L'enclos n'a pas été trouvé !");
-            actions.getChildren().add(notFoundLabel);
-        }
+        Label areFeededLabel = new Label("Les créatures ont été nourrits !");
+        actions.getChildren().add(areFeededLabel);
     }
 
     @FXML
@@ -225,9 +225,9 @@ public class EnclosureController {
 
         actions.getChildren().removeAll(actions.getChildren());
 
-        if (enclosure != null){
-            enclosure.clean();
-            enclosure.setCleanliness();
+        if (this.enclosure != null){
+            this.enclosure.clean();
+            this.enclosure.setCleanliness(true);
             Label isCleanLabel = new Label("L'enclos a été nettoyé !");
             actions.getChildren().add(isCleanLabel);
         }

@@ -1,5 +1,7 @@
 package fr.fantasticzoo.creatures.propertiesInterfaces;
 
 public interface Flyer {
-    public void fly();
+    public default void fly() {
+        System.out.println("I'm flying");
+    }
 }

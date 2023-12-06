@@ -1,13 +1,12 @@
 package fr.fantasticzoo.creatures.Lycanthropes;
 
-import fr.fantasticzoo.creatures.abstractClasses.Viviparous;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Flyer;
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Viviparous;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Runner;
-import fr.fantasticzoo.enums.Age;
 import fr.fantasticzoo.enums.DominationRank;
 import fr.fantasticzoo.enums.Sex;
 
-public class Lycanthrope extends Viviparous implements Runner {
+public class Lycanthrope extends AbstractCreature implements Runner, Viviparous {
     //Lorsque le facteur de domination est en dessous d’un certain seuil, le lycanthrope perd naturellement un rang de domination s’il n’est pas le dernier de son sexe dans la meute à l’avoir (par exemple : le dernier mâle β d’une meute ne pourra pas devenir un mâle γ).
     private int strength;
     private int dominationFactor;
@@ -32,12 +31,12 @@ public class Lycanthrope extends Viviparous implements Runner {
                 ", age=" + age +
                 ", isHungry=" + isHungry +
                 ", isSleeping=" + isSleeping +
-                ", health=" + health +
+                ", health=" + isSick +
                 '}';
     }
-    @Override
-    public void run() {}
-
+    public void giveBirth() {
+        System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
+    }
 
     public DominationRank getRankDomination() { return rankDomination; }
     public void setRankDomination(DominationRank rankDomination) { this.rankDomination = rankDomination; }
@@ -78,7 +77,7 @@ public class Lycanthrope extends Viviparous implements Runner {
 
     //Les lycanthropes ω sont des lycanthropes adultes considérés comme ayant une force insuffisante par rapport à la moyenne du groupe.
     public boolean isOmega(){
-        if(this.getSex() == Sex.male && this.getAge() == Age.adult && this.getStrength() < pack.averageStrength){
+        if(this.getSex() == Sex.male && this.getAge() > 40 && this.getStrength() < pack.averageStrength){
             this.setRankDomination(DominationRank.ω);
             return true;
         }
