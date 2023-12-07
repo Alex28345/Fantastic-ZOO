@@ -31,8 +31,6 @@ public class Game implements Runnable{
         };
         timer.schedule(task, 0, jsonParameters.getInt("timeBetweenTurns"));
     }
-
-
     private JsonObject readJSON(String path) throws FileNotFoundException {
         try {
             InputStream fis = new FileInputStream(path);

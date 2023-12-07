@@ -3,7 +3,7 @@ package fr.fantasticzoo.enclosures;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Flyer;
 
-public class Aviary<T extends AbstractCreature & Flyer> extends Enclosure<T> {
+public class Aviary<creatureType extends AbstractCreature & Flyer> extends Enclosure<creatureType> {
     private int height;
 
 
@@ -13,7 +13,7 @@ public class Aviary<T extends AbstractCreature & Flyer> extends Enclosure<T> {
     }
 
     @Override
-    public void addCreatures(T creature) {
+    public void addCreatures(creatureType creature) {
         if (creature != null){
             super.addCreatures(creature);
         }

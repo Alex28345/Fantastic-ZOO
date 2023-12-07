@@ -3,7 +3,7 @@ package fr.fantasticzoo.enclosures;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
 
-public class Aquarium<T extends AbstractCreature & Swimmer> extends Enclosure<T> {
+public class Aquarium<creatureType extends AbstractCreature & Swimmer> extends Enclosure<creatureType> {
     private int depth;
     private boolean salinity;
 
@@ -15,7 +15,7 @@ public class Aquarium<T extends AbstractCreature & Swimmer> extends Enclosure<T>
     }
 
     @Override
-    public void addCreatures(T creature) {
+    public void addCreatures(creatureType creature) {
         if (creature != null){
             super.addCreatures(creature);
         }

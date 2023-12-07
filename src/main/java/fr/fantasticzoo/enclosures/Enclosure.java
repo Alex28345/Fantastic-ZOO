@@ -1,6 +1,7 @@
 package fr.fantasticzoo.enclosures;
 
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.Node;
@@ -12,17 +13,18 @@ import java.util.Set;
 
 public abstract class Enclosure<creatureType extends AbstractCreature> {
     private String name; //nom de l'enclos
-    private String CREATURE_TYPE; //type de créatu
-    // re de l'enclos (le nom des créatures de l'enclos)
+    private creatureType type; //type de créature de l'enclos
     private int surface; //surface en m²
     private int capacity; //nombre de créatures max
     private int creatureCount; //nombre de créatures
     private boolean cleanliness; //propreté
 
+
     private ObservableMap<AbstractCreature, Node> observableCreatureMap;
 
     public Enclosure(String name, int surface, int capacity) {
         this.name = name;
+        this.type = null;
         this.surface = surface;
         this.capacity = capacity;
         this.creatureCount = 0;
@@ -31,9 +33,9 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
     }
 
     public void addCreatures(creatureType creature) {
-        if (this.CREATURE_TYPE == null)
-            this.CREATURE_TYPE = creature.getClass().toString();
-        if(creature.getClass().toString().equals(CREATURE_TYPE)) {
+        if (this.type == null)
+            this.type = creature;
+        if(creature.getClass() == this.type.getClass()) {
             if(this.getCreatures().size() < capacity){
                 if (!this.getCreatures().contains(creature) ) {
                     observableCreatureMap.put(creature, new Button(creature.getName()));
@@ -49,14 +51,9 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
             System.out.println("\u001B[31mLa créature n'est pas du bon type\u001B[0m");
     }
 
-    public String display(){
-        return "Noms de l'enclos : " + name + "\n" + "Surface : " + surface + "\n" + "Capacité : " + capacity + "\n" + "Nombre de créatures présentes : " + creatureCount + "\n" + "Etat : " + cleanliness;
-    }
-
     public void removeCreatures(creatureType creature){
         this.getCreatures().remove(creature);
     }
-
 
     public void clean(){
         if (!getCleanliness()) {
