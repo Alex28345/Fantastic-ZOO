@@ -1,7 +1,6 @@
 package fr.fantasticzoo.enclosures;
 
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Flyer;
 
 public class Aviary<T extends AbstractCreature & Flyer> extends Enclosure<T> {

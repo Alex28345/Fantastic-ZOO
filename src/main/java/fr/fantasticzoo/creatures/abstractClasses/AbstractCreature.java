@@ -1,6 +1,5 @@
 package fr.fantasticzoo.creatures.abstractClasses;
 
-import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enums.Sex;
 
 public abstract class AbstractCreature {

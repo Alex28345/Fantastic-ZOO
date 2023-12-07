@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static fr.fantasticzoo.creatures.StaticCreator.*;
 
-public class HelloApplication extends Application {
+public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Zoo zoo = Zoo.getInstance("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
         Thread gameThread = new Thread(game);
         gameThread.start();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("app.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("app.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 800);
         stage.setTitle("Zoo fantastique");
         stage.setScene(scene);
@@ -50,7 +50,7 @@ public class HelloApplication extends Application {
 
     //TO DO : changeScene() method en generic
     public static EnclosureController changeScene(Stage stage, String fxml, String name) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml));
         Scene scene = new Scene(fxmlLoader.load(), 900, 800);
         stage.setTitle(name);
         stage.setScene(scene);

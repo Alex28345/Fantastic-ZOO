@@ -2,11 +2,9 @@ package fr.fantasticzoo.app;
 
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enclosures.StandardEnclosure;
 import fr.fantasticzoo.enums.Age;
-import fr.fantasticzoo.enums.EnclosureType;
 import fr.fantasticzoo.enums.Sex;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
@@ -22,12 +20,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class EnclosureController<T extends AbstractCreature> {

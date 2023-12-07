@@ -1,15 +1,11 @@
 package fr.fantasticzoo.enclosures;
 
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
-import fr.fantasticzoo.creatures.propertiesInterfaces.Creature;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

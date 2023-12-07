@@ -73,7 +73,7 @@ public class Controller implements Initializable {
     public void enclosureButtonAction(ActionEvent actionEvent) {
         EnclosureController controller = null;
         try {
-            controller = HelloApplication.changeScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), "enclosureView.fxml", "Enclos");
+            controller = App.changeScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), "enclosureView.fxml", "Enclos");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
