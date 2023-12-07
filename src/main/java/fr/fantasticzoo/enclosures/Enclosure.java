@@ -10,9 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class Enclosure<T extends AbstractCreature> {
+public abstract class Enclosure<creatureType extends AbstractCreature> {
     private String name; //nom de l'enclos
-    private String CREATURE_TYPE; //type de créature de l'enclos (le nom des créatures de l'enclos)
+    private String CREATURE_TYPE; //type de créatu
+    // re de l'enclos (le nom des créatures de l'enclos)
     private int surface; //surface en m²
     private int capacity; //nombre de créatures max
     private int creatureCount; //nombre de créatures
@@ -29,7 +30,7 @@ public abstract class Enclosure<T extends AbstractCreature> {
         this.observableCreatureMap = FXCollections.observableMap(new HashMap<AbstractCreature, Node>());
     }
 
-    public void addCreatures(T creature) {
+    public void addCreatures(creatureType creature) {
         if (this.CREATURE_TYPE == null)
             this.CREATURE_TYPE = creature.getClass().toString();
         if(creature.getClass().toString().equals(CREATURE_TYPE)) {
@@ -52,7 +53,7 @@ public abstract class Enclosure<T extends AbstractCreature> {
         return "Noms de l'enclos : " + name + "\n" + "Surface : " + surface + "\n" + "Capacité : " + capacity + "\n" + "Nombre de créatures présentes : " + creatureCount + "\n" + "Etat : " + cleanliness;
     }
 
-    public void removeCreatures(T creature){
+    public void removeCreatures(creatureType creature){
         this.getCreatures().remove(creature);
     }
 

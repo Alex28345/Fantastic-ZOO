@@ -6,26 +6,31 @@ import fr.fantasticzoo.enums.Sex;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static java.lang.Math.round;
 
 public class Pack {
     ArrayList<Lycanthrope> lycanthropeArrayList = new ArrayList<>();
-    private int averageStrength;
-
-
-
     private Lycanthrope alphaMale;
     private Lycanthrope alphaFemale;
-    public int getAverageStrength() {
-        return averageStrength;
-    }
 
     public Pack(ArrayList<Lycanthrope> lycanthropeArrayList) {
         this.lycanthropeArrayList.addAll(lycanthropeArrayList);
-        this.averageStrength = setTotalStrength();
         this.alphaMale = selectAlphaMale();
         this.alphaFemale = selectAlphaFemale();
+        this.setAllDominationRank();
+    }
+
+    public void addLycanthrope(Lycanthrope lycanthrope){
+        this.lycanthropeArrayList.add(lycanthrope);
+        this.setAllDominationRank();
+    }
+
+    public void removeLycanthrope(Lycanthrope lycanthrope){
+        this.lycanthropeArrayList.remove(lycanthrope);
+        this.setAllDominationRank();
     }
 
     public Lycanthrope getAlphaMale() {
@@ -44,13 +49,47 @@ public class Pack {
         this.alphaFemale = alphaFemale;
     }
 
-    public int setTotalStrength() {
+    public int getAverageStrength() {
         int tmp = 0;
         for (Lycanthrope lycanthrope : lycanthropeArrayList) {
             tmp = tmp + lycanthrope.getStrength();
         }
         return tmp / lycanthropeArrayList.size();
     }
+
+    public void sortLycanthropesListByStrenght(){
+        this.lycanthropeArrayList.sort(new Comparator<Lycanthrope>() {
+            @Override
+            public int compare(Lycanthrope l1, Lycanthrope l2) {
+                return Integer.compare(l1.getStrength(), l2.getStrength());
+            }
+        });
+    }
+
+    public void setAllDominationRank(){
+        if(this.lycanthropeArrayList.isEmpty()){
+            return;
+        }
+        this.sortLycanthropesListByStrenght();
+        int i = 0;
+        DominationRank rank = DominationRank.β;
+        for(Lycanthrope lycanthrope : this.lycanthropeArrayList){
+            if(lycanthrope.getRankDomination() == DominationRank.α ){
+                continue;
+            }
+            if(lycanthrope.getStrength() < this.getAverageStrength()){
+                lycanthrope.setRankDomination(DominationRank.ω);
+                continue;
+            }
+            lycanthrope.setRankDomination(rank);
+            i++;
+            if(i == 2) {
+                rank = DominationRank.values()[rank.ordinal() + 1];
+                i = 0;
+            }
+        }
+    }
+
     public Lycanthrope selectAlphaMale(){
         if(lycanthropeArrayList.isEmpty()){
             return null;

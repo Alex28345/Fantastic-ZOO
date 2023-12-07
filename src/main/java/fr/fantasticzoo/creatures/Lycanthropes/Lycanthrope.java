@@ -114,14 +114,6 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         return lycanthrope.getRankDomination() == rankDomination.α && lycanthrope.getSex() == Sex.female;
     }
 
-    public void lycanthropeDominateAlpha(Lycanthrope alphaVictim){
-        if (this.getRankDomination() != DominationRank.α && alphaVictim.getRankDomination() == DominationRank.α){
-            this.setRankDomination(DominationRank.α);
-            alphaVictim.setRankDomination(this.getRankDomination());
-            System.out.println("J'ai dominé l'alpha de ma meute");
-        }
-    }
-
     public void fightAlpha(Lycanthrope victim){
         if(this.getLevel() > victim.getLevel()){
             Pack pack = this.getPack();

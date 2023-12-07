@@ -31,7 +31,7 @@
     <right>
         <VBox alignment="CENTER" spacing="10" fx:id="enclosureActions">
             <Button text="Ajouter" onAction="#addCreature"/>
-            <Button text="Enlever" onAction="#removeCreature"/>
+<!--            <Button text="Enlever" onAction="#removeCreature"/>-->
             <Button text="Nourrir" onAction="#feedCreatures"/>
             <Button text="Entretenir" onAction="#cleanEnclosure"/>
         </VBox>

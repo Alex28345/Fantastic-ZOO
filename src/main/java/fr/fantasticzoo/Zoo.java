@@ -2,7 +2,6 @@ package fr.fantasticzoo;
 
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.enclosures.Enclosure;
-import fr.fantasticzoo.enclosures.StandardEnclosure;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.Node;

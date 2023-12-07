@@ -9,8 +9,10 @@ import fr.fantasticzoo.enums.EnclosureType;
 import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -71,14 +73,20 @@ public class Controller implements Initializable {
 
     @FXML
     public void enclosureButtonAction(ActionEvent actionEvent) {
-        EnclosureController controller = null;
+
+        Button b = (Button) actionEvent.getSource();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("enclosureView.fxml"));
+        fxmlLoader.setControllerFactory(type -> new EnclosureController(zoo.getEnclosureWithButton(b)));
+
+        Scene scene = null;
         try {
-            controller = App.changeScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), "enclosureView.fxml", "Enclos");
+            scene = new Scene(fxmlLoader.load(), 900, 800);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Button b = (Button) actionEvent.getSource();
-        controller.setData(zoo.getEnclosureWithButton(b));
-        System.out.println(zoo.getEnclosureWithButton(b).getName());
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setTitle("Enclos");
+        stage.setScene(scene);
+        stage.show();
     }
 }
