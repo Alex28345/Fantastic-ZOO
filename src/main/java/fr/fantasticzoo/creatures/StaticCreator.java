@@ -15,6 +15,11 @@ public class StaticCreator {
             return Sex.female;
     }
 
+    /**
+     * Toutes les fonctions qui suivent permettent de créer des créatures (Dragon, Kraken, Lycanthrope, Megalodon, etc...)
+     * @param name
+     * @return
+     */
     public static Dragon createDragon(String name){
         return new Dragon(name,0, randomSex(), 200, 100);
     }

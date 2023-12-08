@@ -15,11 +15,19 @@ public class Game implements Runnable{
     private JsonObject jsonParameters;
     private final GameLoop gameLoop;
 
+    /**
+     * Constructeur de la classe Game
+     * Initialise les paramètres du jeu en lisant un fichier JSON et crée une instance de GameLoop
+     * @throws FileNotFoundException
+     */
     public Game() throws FileNotFoundException {
         jsonParameters = this.readJSON("src/main/resources/fr/fantasticzoo/app/properties.json");
         gameLoop = new GameLoop(jsonParameters);
     }
 
+    /**
+     * Exécute une tâche de manière répétée à intervalles réguliers en utilisant un TimerTask
+     */
     public void run() {
         TimerTask task = new TimerTask() {
             @Override
@@ -31,6 +39,13 @@ public class Game implements Runnable{
         };
         timer.schedule(task, 0, jsonParameters.getInt("timeBetweenTurns"));
     }
+
+    /**
+     * Lit le contenu d'un fichier JSON à partir du chemin spécifié
+     * @param path
+     * @return un objet JsonObject
+     * @throws FileNotFoundException
+     */
     private JsonObject readJSON(String path) throws FileNotFoundException {
         try {
             InputStream fis = new FileInputStream(path);

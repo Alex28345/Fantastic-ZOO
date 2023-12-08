@@ -34,6 +34,10 @@ public class Controller implements Initializable {
     private ComboBox selectedCreature;
     @FXML
     private FlowPane enclosures;
+
+    /**
+     * Crée un enclos
+     */
     @FXML
     public void createEnclosure() {
         switch (selectedCreature.getValue().toString()) {
@@ -43,6 +47,11 @@ public class Controller implements Initializable {
         };
     }
 
+    /**
+     * Initialisation des données
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for (EnclosureType type : EnclosureType.values()) {
@@ -71,6 +80,10 @@ public class Controller implements Initializable {
         });
     }
 
+    /**
+     * Gestion de l'évènement "Click sur un enclos"
+     * @param actionEvent
+     */
     @FXML
     public void enclosureButtonAction(ActionEvent actionEvent) {
 

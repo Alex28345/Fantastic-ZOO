@@ -31,6 +31,10 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         this.setHeight(height);
     }
 
+    /**
+     * Obtient le niveau d'une lycanthrope
+     * @return Le niveau d'une lycanthrope
+     */
     public double getLevel(){
         double level = 0;
         if (this.getAge() < 20){
@@ -51,11 +55,23 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         return level;
     }
 
+    /**
+     * Donner naissance
+     */
     public void giveBirth() {
         System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
     }
 
+    /**
+     * Obtient son classement de domination
+     * @return Un classement
+     */
     public DominationRank getRankDomination() { return rankDomination; }
+
+    /**
+     * Définit son classement de domination
+     * @param rankDomination Un classement
+     */
     public void setRankDomination(DominationRank rankDomination) { this.rankDomination = rankDomination; }
 
     public int getStrength() { return strength; }
@@ -75,8 +91,21 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
             return null;
         return this.pack;
     }
+
+    /**
+     * Se séparer de la meute
+     */
     public void separatePack(){ System.out.println("Je me sépare de ma meute"); }
+
+    /**
+     * Se transformer en humain
+     */
     public void humanTransformation(){ System.out.println("Je me transforme en humain"); }
+
+    /**
+     * Dominer une autre lycanthrope
+     * @param victim
+     */
     public void domination(Lycanthrope victim){
         if (victim.getImpetuosityFactor() <= this.getImpetuosityFactor() && !isAlphaFemale(victim) && this.getRankDomination() != DominationRank.ω){
             if (victim.getRankDomination() == DominationRank.α)
@@ -105,6 +134,10 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         }
     }
 
+    /**
+     * Vérifie si la lycanthrope est un oméga
+     * @return C'est un oméga ou pas
+     */
     //Les lycanthropes ω sont des lycanthropes adultes considérés comme ayant une force insuffisante par rapport à la moyenne du groupe.
     public boolean isOmega(){
         if(this.getSex() == Sex.male && this.getAge() > 40 && this.getStrength() < pack.getAverageStrength()){
@@ -114,10 +147,20 @@ public class Lycanthrope extends AbstractCreature implements Runner, Viviparous 
         return false;
     }
 
+    /**
+     * Vérifie si le lycanthrope est une femelle alpha
+     * @param lycanthrope Le lycanthrope à vérifier
+     * @return true si le lycanthrope est une femelle alpha, sinon false
+     */
     public boolean isAlphaFemale(Lycanthrope lycanthrope){
         return lycanthrope.getRankDomination() == rankDomination.α && lycanthrope.getSex() == Sex.female;
     }
 
+    /**
+     * Simule un combat entre le lycanthrope actuel et une victime
+     * Si le lycanthrope actuel a un niveau supérieur à la victime, il devient l'alpha de la meute
+     * @param victim La victime du combat
+     */
     public void fightAlpha(Lycanthrope victim){
         if(this.getLevel() > victim.getLevel()){
             Pack pack = this.getPack();

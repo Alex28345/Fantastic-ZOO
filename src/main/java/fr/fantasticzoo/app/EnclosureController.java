@@ -70,9 +70,15 @@ public class EnclosureController implements Initializable {
         this.enclosure = enclosureWithButton;
     }
 
+    /**
+     * Gestion de l'évènement "Click sur une créature"
+     * @param actionEvent
+     * @param <creatureType>
+     */
     @FXML
     private <creatureType extends AbstractCreature<?>> void creatureButtonAction(ActionEvent actionEvent) {
         Button b;
+        // Vérifie si la source de l'évènement est un bouton
         if (actionEvent.getSource() instanceof Button) {
             b = (Button) actionEvent.getSource();
         } else {
@@ -81,11 +87,14 @@ public class EnclosureController implements Initializable {
         creatureInfo.getChildren().clear();
         if(this.enclosure.getCreatureWithButton(b) == null)
             return;
+        // Affiche les informations relatives à la créature
         creatureType clickedCreature = (creatureType) this.enclosure.getCreatureWithButton(b);
         age.setText("Age : " + clickedCreature.getAge());
         gender.setText("Genre : " + clickedCreature.getSex());
         weight.setText("Poids : " + clickedCreature.getWeight() + " kg");
         height.setText("Hauteur : " + clickedCreature.getHeight() + " cm");
+
+        // Gestion de la créature
         if (clickedCreature.isHungry())
             hunger.setText("Faim : Oui");
         else
@@ -119,6 +128,10 @@ public class EnclosureController implements Initializable {
 
     }
 
+    /**
+     * Permet d'ajouter une créature à l'enclos (ici cette méthode n'est pas fonctionnelle mais elle était en cours de façonnage)
+     * @param actionEvent
+     */
     @FXML
     public void addCreature(ActionEvent actionEvent){
         creatureInfo.getChildren().clear();
@@ -127,7 +140,6 @@ public class EnclosureController implements Initializable {
         //zone infos de la créature à ajouter
         Label nameLabelAdd = new Label("Entrez le nom d'une Créature à ajouter");
         TextField NameTextFieldAdd = new TextField();
-        //
 
         Button addButton = new Button("Ajouter la créature");
         addButton.setDisable(false);
@@ -137,11 +149,15 @@ public class EnclosureController implements Initializable {
         creatureInfo.getChildren().add(actions);
 
         addButton.setOnAction(event ->{
-            String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
+            String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la créature dans le textField
             Label creatureNameLabel = new Label(creatureName);
         });
     }
 
+    /**
+     * Nourrir les créatures lorsque que l'on clique sur bouton "Nourrir"
+     * @param actionEvent
+     */
     @FXML
     public void feedCreatures(ActionEvent actionEvent){
         actions.getChildren().removeAll(actions.getChildren());
@@ -152,6 +168,10 @@ public class EnclosureController implements Initializable {
         actions.getChildren().add(areFeededLabel);
     }
 
+    /**
+     * Nettoie l'enclos
+     * @param actionEvent
+     */
     @FXML
     public void cleanEnclosure(ActionEvent actionEvent){
 
@@ -168,6 +188,11 @@ public class EnclosureController implements Initializable {
             actions.getChildren().add(notFoundLabel);
         }
     }
+
+    /**
+     * Retourner au menu (à la vue sur le zoo)
+     * @param actionEvent
+     */
     @FXML
     public void returnMenu(ActionEvent actionEvent){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
@@ -183,6 +208,11 @@ public class EnclosureController implements Initializable {
         }
     }
 
+    /**
+     * Initialisation des données
+     * @param url
+     * @param resourceBundle
+     */
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.zoo = Zoo.getInstance();

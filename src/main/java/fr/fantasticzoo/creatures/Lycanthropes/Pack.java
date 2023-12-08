@@ -21,11 +21,20 @@ public class Pack {
         this.setAllDominationRank();
     }
 
+    /**
+     * Ajoute une lycanthrope
+     * @param lycanthrope
+     */
     public void addLycanthrope(Lycanthrope lycanthrope){
         this.lycanthropeArrayList.add(lycanthrope);
         this.setAllDominationRank();
     }
 
+
+    /**
+     * Supprime une lycanthrope
+     * @param lycanthrope
+     */
     public void removeLycanthrope(Lycanthrope lycanthrope){
         this.lycanthropeArrayList.remove(lycanthrope);
         this.setAllDominationRank();
@@ -47,6 +56,10 @@ public class Pack {
         this.alphaFemale = alphaFemale;
     }
 
+    /**
+     * Calcule la force moyenne
+     * @return
+     */
     public int getAverageStrength() {
         int tmp = 0;
         for (Lycanthrope lycanthrope : lycanthropeArrayList) {
@@ -55,6 +68,9 @@ public class Pack {
         return tmp / lycanthropeArrayList.size();
     }
 
+    /**
+     * Trie les lycanthropes selon leur force
+     */
     public void sortLycanthropesListByStrenght(){
         this.lycanthropeArrayList.sort(new Comparator<Lycanthrope>() {
             @Override
@@ -64,6 +80,10 @@ public class Pack {
         });
     }
 
+
+    /**
+     * Classe les lycanthropes en fonction de leur force et attribue des rangs de domination en fonction de leur position
+     */
     public void setAllDominationRank(){
         if(this.lycanthropeArrayList.isEmpty()){
             return;
@@ -88,6 +108,10 @@ public class Pack {
         }
     }
 
+    /**
+     * Selectionne un male alpha
+     * @return Lycanthrope
+     */
     public Lycanthrope selectAlphaMale(){
         if(lycanthropeArrayList.isEmpty()){
             return null;
@@ -101,6 +125,11 @@ public class Pack {
         alphaMale.setRankDomination(DominationRank.α);
         return alphaMale;
     }
+
+    /**
+     * Selectionne une femelle alpha
+     * @return Lycanthrope
+     */
     public Lycanthrope selectAlphaFemale(){
         if(lycanthropeArrayList.isEmpty()){
             return null;

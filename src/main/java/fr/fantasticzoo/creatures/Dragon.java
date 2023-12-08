@@ -16,9 +16,17 @@ public class Dragon extends AbstractCreature<Dragon> implements Runner, Swimmer,
         this.isSick = false;
         this.setMaxAge(500);
     }
+
+    /**
+     * Le dragon pond des oeufs
+     */
     public void layEggs() {
         System.out.println("The dragon gave birth to a baby dragon.");
     }
+
+    /**
+     * Faire renaître
+     */
     public void resurrect() {
         System.out.println("The dragon resurrected.");
         this.setAge(0);

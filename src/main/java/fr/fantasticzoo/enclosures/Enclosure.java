@@ -33,6 +33,11 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
         this.observableCreatureMap = FXCollections.observableMap(new HashMap<>());
     }
 
+
+    /**
+     * Ajoute une créature à l'enclos
+     * @param creature
+     */
     public void addCreatures(creatureType creature) {
         if (this.type == null)
             this.type = creature;
@@ -52,10 +57,17 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
             System.out.println("\u001B[31mLa créature n'est pas du bon type\u001B[0m");
     }
 
+    /**
+     * Supprime une créature de l'enclos
+     * @param creature
+     */
     public void removeCreatures(creatureType creature){
         this.observableCreatureMap.remove(creature);
     }
 
+    /**
+     * Nettoie l'enclos
+     */
     public void clean(){
         if (!getCleanliness()) {
             this.cleanliness = true;
@@ -69,6 +81,10 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
         this.cleanliness = cleanliness;
     }
 
+    /**
+     * Obtient la propreté sous forme de chaine de caractère
+     * @return Une chaine de caractère
+     */
     public String getCleanlinessToString(){
         if (cleanliness)
             return "Propre";
@@ -76,16 +92,41 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
             return "Sale";
     }
 
+    /**
+     * Obtient le nombre de créatures dans l'enclos
+     * @return Le nombre de créatures
+     */
     public int getCreatureCount() { return creatureCount; }
 
+    /**
+     * Obtient le nom de l'enclos
+     * @return Le nom de l'enclos
+     */
     public String getName() { return name; }
 
+    /**
+     * Obtient la surface de l'enclos
+     * @return La surface de l'enclos
+     */
     public int getSurface(){ return surface; }
 
+    /**
+     * Obtient la capacité de l'enclos
+     * @return La capacité de l'enclos
+     */
     public int getCapacity(){ return capacity; }
 
+    /**
+     * Définit le nom de l'enclos
+     * @param name
+     */
     public void setName(String name) { this.name = name; }
 
+    /**
+     *  Obtient la créature qui été assignée au bouton en paramètre
+     * @param button
+     * @return La créature assignée au bouton
+     */
     public creatureType getCreatureWithButton(Button button) {
         return observableCreatureMap.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(button))
@@ -94,10 +135,18 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
                 .orElse(null);
     }
 
+    /**
+     * Obtient une map observable de créatures
+     * @return Une map observable
+     */
     public Set<creatureType> getCreatures() {
         return observableCreatureMap.keySet();
     }
 
+    /**
+     * Obtient une observable map de créatures
+     * @return Une observable map de créatures
+     */
     public ObservableMap<creatureType, Node> getObservableCreatureMap() {
         return observableCreatureMap;
     }

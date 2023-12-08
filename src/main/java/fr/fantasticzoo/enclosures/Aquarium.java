@@ -14,6 +14,10 @@ public class Aquarium<creatureType extends AbstractCreature & Swimmer> extends E
         this.salinity = false;
     }
 
+    /**
+     * Ajoute une créature à l'aquarium
+     * @param creature une créature
+     */
     @Override
     public void addCreatures(creatureType creature) {
         if (creature != null){
@@ -24,6 +28,9 @@ public class Aquarium<creatureType extends AbstractCreature & Swimmer> extends E
         }
     }
 
+    /**
+     * Nettoie l'aquarium
+     */
     @Override
     public void clean(){
         System.out.println("La profondeur est de : " + this.depth);

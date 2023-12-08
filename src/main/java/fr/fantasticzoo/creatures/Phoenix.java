@@ -17,9 +17,16 @@ public class Phoenix extends AbstractCreature<Phoenix> implements Flyer, Immorta
         this.setWeight(weight);
         this.setHeight(height);
     }
+    /**
+     * Le phoenix pond des oeufs
+     */
     public void layEggs() {
         System.out.println("The dragon gave birth to a baby dragon.");
     }
+
+    /**
+     * Le phoenix renaît
+     */
     public void resurrect() {
         System.out.println("The dragon resurrected.");
         this.setAge(0);

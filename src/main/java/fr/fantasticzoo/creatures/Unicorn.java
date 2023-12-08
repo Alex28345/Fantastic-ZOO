@@ -16,6 +16,10 @@ public class Unicorn extends AbstractCreature<Unicorn> implements Runner, Vivipa
         this.setWeight(weight);
         this.setHeight(height);
     }
+
+    /**
+     * La licorne donne naissance
+     */
     public void giveBirth() {
         System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
     }

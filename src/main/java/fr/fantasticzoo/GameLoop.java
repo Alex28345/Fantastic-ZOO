@@ -10,10 +10,20 @@ import java.util.Random;
 public class GameLoop{
     private Zoo zoo;
     private JsonObject jsonParameters;
+
+    /**
+     * Initialise l'instance de Zoo en utilisant les paramètres JSON spécifiés
+     * @param jsonParameters
+     */
     public GameLoop( JsonObject jsonParameters) {
         this.zoo = Zoo.getInstance();
         this.jsonParameters = jsonParameters;
     }
+
+    /**
+     * Effectue une itération du cycle de jeu
+     * Simule les activités des créatures dans chaque enclos en fonction des probabilités spécifiées
+     */
     public void doLoop() {
 
         this.creaturesGrow();
@@ -63,6 +73,10 @@ public class GameLoop{
             }
         }
     }
+
+    /**
+     * Fait vieillir les créatures du zoo
+     */
     private void creaturesGrow(){
         for (AbstractCreature<?> creature : this.zoo.getCreatures()) {
             if(creature.getAge() < creature.getMaxAge())

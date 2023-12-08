@@ -18,6 +18,10 @@ public class Kraken extends AbstractCreature<Kraken> implements Swimmer, Oviparo
         this.setHeight(height);
 
     }
+
+    /**
+     * Pond des oeufs
+     */
     public void layEggs() {
         System.out.println("The dragon gave birth to a baby dragon.");
     }

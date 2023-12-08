@@ -16,6 +16,9 @@ public class Siren extends AbstractCreature<Siren> implements Swimmer, Viviparou
         this.setWeight(weight);
         this.setHeight(height);
     }
+    /**
+     * La sirène donne naissance
+     */
     public void giveBirth() {
         System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
     }

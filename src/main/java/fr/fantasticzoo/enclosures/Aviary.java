@@ -12,6 +12,10 @@ public class Aviary<creatureType extends AbstractCreature & Flyer> extends Enclo
         this.height = height;
     }
 
+    /**
+     * Ajoute une créature à la volière
+     * @param creature
+     */
     @Override
     public void addCreatures(creatureType creature) {
         if (creature != null){
@@ -22,6 +26,10 @@ public class Aviary<creatureType extends AbstractCreature & Flyer> extends Enclo
         }
     }
 
+
+    /**
+     * Nettoie la volière
+     */
     @Override
     public void clean(){
         System.out.println("La hauteur est de : " + this.height);

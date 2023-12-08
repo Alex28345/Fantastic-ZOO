@@ -17,9 +17,16 @@ public class Nymph extends AbstractCreature<Nymph> implements Runner, Immortal, 
         this.setWeight(weight);
         this.setHeight(height);
     }
+    /**
+     * La nymphe donne naissance
+     */
     public void giveBirth() {
         System.out.println("The lycanthrope gave birth to a baby lycanthrope.");
     }
+
+    /**
+     * La nymphe renaît
+     */
     public void resurrect() {
         System.out.println("The dragon resurrected.");
         this.setAge(0);

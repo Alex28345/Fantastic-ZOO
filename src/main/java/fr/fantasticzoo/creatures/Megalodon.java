@@ -17,6 +17,10 @@ public class Megalodon extends AbstractCreature<Megalodon> implements Swimmer, O
         this.setWeight(weight);
         this.setHeight(height);
     }
+
+    /**
+     * Pond des oeufs
+     */
     public void layEggs() {
         System.out.println("The dragon gave birth to a baby dragon.");
     }
