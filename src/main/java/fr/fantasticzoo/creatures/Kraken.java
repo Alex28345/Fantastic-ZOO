@@ -5,14 +5,18 @@ import fr.fantasticzoo.creatures.propertiesInterfaces.Oviparous;
 import fr.fantasticzoo.creatures.propertiesInterfaces.Swimmer;
 import fr.fantasticzoo.enums.Sex;
 
-public class Kraken extends AbstractCreature implements Swimmer, Oviparous {
+public class Kraken extends AbstractCreature<Kraken> implements Swimmer, Oviparous {
 
-    public Kraken(String name, int age, Sex sex) {
+    public Kraken(String name, int age, Sex sex, int weight, int height) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.isHungry = false;
         this.isSick = false;
+        this.setMaxAge(150);
+        this.setWeight(weight);
+        this.setHeight(height);
+
     }
     public void layEggs() {
         System.out.println("The dragon gave birth to a baby dragon.");

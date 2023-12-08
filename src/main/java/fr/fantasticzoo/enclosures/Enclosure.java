@@ -17,10 +17,11 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
     private int surface; //surface en m²
     private int capacity; //nombre de créatures max
     private int creatureCount; //nombre de créatures
+
     private boolean cleanliness; //propreté
 
 
-    private ObservableMap<AbstractCreature, Node> observableCreatureMap;
+    private ObservableMap<creatureType, Node> observableCreatureMap;
 
     public Enclosure(String name, int surface, int capacity) {
         this.name = name;
@@ -29,7 +30,7 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
         this.capacity = capacity;
         this.creatureCount = 0;
         this.cleanliness = true;
-        this.observableCreatureMap = FXCollections.observableMap(new HashMap<AbstractCreature, Node>());
+        this.observableCreatureMap = FXCollections.observableMap(new HashMap<>());
     }
 
     public void addCreatures(creatureType creature) {
@@ -39,8 +40,8 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
             if(this.getCreatures().size() < capacity){
                 if (!this.getCreatures().contains(creature) ) {
                     observableCreatureMap.put(creature, new Button(creature.getName()));
+                    creature.setEnclosure(this);
                     creatureCount++;
-                    return;
                 }else {
                     System.out.println("\u001B[31mLa créature est déjà dans l'enclos\u001B[0m");
                 }
@@ -52,7 +53,7 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
     }
 
     public void removeCreatures(creatureType creature){
-        this.getCreatures().remove(creature);
+        this.observableCreatureMap.remove(creature);
     }
 
     public void clean(){
@@ -85,7 +86,7 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
 
     public void setName(String name) { this.name = name; }
 
-    public AbstractCreature getCreatureWithButton(Button button) {
+    public creatureType getCreatureWithButton(Button button) {
         return observableCreatureMap.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(button))
                 .map(Map.Entry::getKey)
@@ -93,11 +94,11 @@ public abstract class Enclosure<creatureType extends AbstractCreature> {
                 .orElse(null);
     }
 
-    public Set<AbstractCreature> getCreatures() {
+    public Set<creatureType> getCreatures() {
         return observableCreatureMap.keySet();
     }
 
-    public ObservableMap<AbstractCreature, Node> getObservableCreatureMap() {
+    public ObservableMap<creatureType, Node> getObservableCreatureMap() {
         return observableCreatureMap;
     }
 }

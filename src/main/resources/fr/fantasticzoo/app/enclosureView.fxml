@@ -15,7 +15,6 @@
                 <Label fx:id="enclosureSurface" text="Superficie : " textAlignment="CENTER"/>
                 <Label fx:id="enclosureCreaturesMax" text="Nombre maximal de créatures : " textAlignment="CENTER"/>
                 <Label fx:id="enclosureCleanliness" text="Propreté de l'enclos : " textAlignment="CENTER"/>
-                <Label fx:id="enclosureCreaturesCount" text="Nombre de créatures présentes : " textAlignment="CENTER"/>
             </HBox>
         </VBox>
     </top>
@@ -45,6 +44,9 @@
             <Label fx:id="weight"/>
             <Label fx:id="height"/>
             <Label fx:id="health"/>
+            <Label fx:id="hunger"/>
+            <Label fx:id="sleep"/>
+
             <VBox fx:id="actions" alignment="CENTER">
             </VBox>
         </VBox>

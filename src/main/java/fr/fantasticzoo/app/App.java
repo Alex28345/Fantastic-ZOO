@@ -22,12 +22,12 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         Zoo zoo = Zoo.getInstance("Zoo de la mort", new FantasticZooMaster("Jean", Sex.male));
 
-        StandardEnclosure<Dragon> standardEnclosure = new StandardEnclosure<Dragon>("Enclos de Dragons", 100, 100);
+        StandardEnclosure<Dragon> standardEnclosure = new StandardEnclosure<Dragon>("Enclos de Dragons", 100, 10);
         standardEnclosure.addCreatures(createDragon("stormFly"));
         standardEnclosure.addCreatures(createDragon("Thornado"));
         standardEnclosure.addCreatures(createDragon("Toothless"));
 
-        StandardEnclosure<Nymph> standardEnclosure1 = new StandardEnclosure<Nymph>("Enclos de Nymphes", 100, 60);
+        StandardEnclosure<Nymph> standardEnclosure1 = new StandardEnclosure<Nymph>("Enclos de Nymphes", 100, 20);
         standardEnclosure1.addCreatures(createNymph("Azra"));
         standardEnclosure1.addCreatures(createNymph("Barde"));
         standardEnclosure1.addCreatures(createNymph("Tieffelin"));

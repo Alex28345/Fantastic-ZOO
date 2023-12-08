@@ -4,11 +4,7 @@ import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enclosures.StandardEnclosure;
-import fr.fantasticzoo.enums.Age;
-import fr.fantasticzoo.enums.Sex;
-import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,26 +13,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class EnclosureController implements Initializable {
     private Zoo zoo;
     private Enclosure<?> enclosure;
-
     private Button newButton = new Button();
-
-     //private ArrayList <Enclosure> enclosureList = new ArrayList<Enclosure>(List.of(this.zoo.getEnclosures()));
-     private StandardEnclosure actualStandardEnclosure;
 
     //Informations de l'enclos FXML
     @FXML
@@ -65,6 +54,10 @@ public class EnclosureController implements Initializable {
     Label height;
     @FXML
     Label health;
+    @FXML
+    Label hunger;
+    @FXML
+    Label sleep;
 
     @FXML
     VBox creaturesName;
@@ -77,27 +70,53 @@ public class EnclosureController implements Initializable {
         this.enclosure = enclosureWithButton;
     }
 
-    private void creatureButtonAction(ActionEvent actionEvent) {
-        creatureInfo.getChildren().clear();
-        Button clickedButton = (Button) actionEvent.getSource();
-
-        // On parcourt la Map observable pour trouver la créature associée au bouton
-        for (Map.Entry<AbstractCreature, Node> entry : this.enclosure.getObservableCreatureMap().entrySet()) {
-            if(entry.getValue() instanceof Button && entry.getValue() == clickedButton){
-                AbstractCreature clickedCreature = entry.getKey();
-
-                age.setText("Age : " + clickedCreature.getAge());
-                gender.setText("Genre : " + clickedCreature.getSex());
-                weight.setText("Poids : " + clickedCreature.getWeight());
-                height.setText("Hauteur : " + clickedCreature.getHeight());
-                health.setText("Etat de santé : " + clickedCreature.isSick());
-
-                creatureLabel.setText("Informations sur " + clickedCreature.getName());
-
-                creatureInfo.getChildren().addAll(creatureLabel,age,gender,weight,height,health);
-                break;
-            }
+    @FXML
+    private <creatureType extends AbstractCreature<?>> void creatureButtonAction(ActionEvent actionEvent) {
+        Button b;
+        if (actionEvent.getSource() instanceof Button) {
+            b = (Button) actionEvent.getSource();
+        } else {
+            return;
         }
+        creatureInfo.getChildren().clear();
+        if(this.enclosure.getCreatureWithButton(b) == null)
+            return;
+        creatureType clickedCreature = (creatureType) this.enclosure.getCreatureWithButton(b);
+        age.setText("Age : " + clickedCreature.getAge());
+        gender.setText("Genre : " + clickedCreature.getSex());
+        weight.setText("Poids : " + clickedCreature.getWeight() + " kg");
+        height.setText("Hauteur : " + clickedCreature.getHeight() + " cm");
+        if (clickedCreature.isHungry())
+            hunger.setText("Faim : Oui");
+        else
+            hunger.setText("Faim : Non");
+
+        if (clickedCreature.isSick())
+            health.setText("Etat de santé : Malade");
+        else
+            health.setText("Etat de santé : En bonne santé");
+
+        creatureLabel.setText("Informations sur " + clickedCreature.getName());
+        if (clickedCreature.isSleeping())
+            sleep.setText("la creature se repose...");
+        else
+            sleep.setText("");
+
+        Button feedButton = new Button("Nourrir");
+        feedButton.setOnAction(event -> clickedCreature.feed());
+        Button healButton = new Button("Soigner");
+        healButton.setOnAction(event -> clickedCreature.heal());
+
+        feedButton.setDisable(!clickedCreature.isHungry());
+        healButton.setDisable(!clickedCreature.isSick());
+        if(clickedCreature.isSleeping()) {
+            feedButton.setDisable(true);
+            healButton.setDisable(true);
+        }
+
+
+        creatureInfo.getChildren().addAll(creatureLabel, age, gender, weight, height, health, hunger, feedButton, healButton, sleep);
+
     }
 
     @FXML
@@ -117,60 +136,16 @@ public class EnclosureController implements Initializable {
 
         creatureInfo.getChildren().add(actions);
 
-       /* if (NameTextFieldAdd.getText() != null && ageChoicBox.getValue() != null && genderChoicBox.getValue() != null &&
-                weightTextFieldAdd.getText() != null && heightTextFieldAdd.getText() != null && healthChoicBox.getValue() != null){
-            addButton.setDisable(false);
-        }*/
-        //
         addButton.setOnAction(event ->{
             String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
-
             Label creatureNameLabel = new Label(creatureName);
-            //this.enclosure.addCreatures(this.getClass().getResource());
-            //gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
         });
     }
 
-    //TODO : Faire la méthode removeCreature
-//    @FXML
-//    public void removeCreature(ActionEvent actionEvent){
-//
-//        actions.getChildren().removeAll(actions.getChildren());
-//
-//        Label labelAdd = new Label("Entrez le nom d'une Créature à retirer");
-//        TextField textField = new TextField();
-//        actions.getChildren().addAll(labelAdd, textField);
-//
-//        textField.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                String creatureName = textField.getText();
-//                if (this.enclosure.getObservableCreatureMap() != null) {
-//                    for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
-//                        if (abstractCreature != null && abstractCreature.getName().equals(creatureName)) {
-//                            this.enclosure.removeCreatures((T) abstractCreature);
-//                            //System.out.println(enclosure.showCreatures());
-//                            Label creatureLabel = new Label("Créature retirée : " + creatureName);
-//                            actions.getChildren().add(creatureLabel);
-////                            gridPane.getChildren().remove();
-//                            textField.clear();
-//                            return;
-//                        }
-//                    }
-//                    // La boucle est terminée et la créature n'a pas été trouvée
-//                    Label notFoundLabel = new Label("Créature non trouvée : " + creatureName);
-//                    actions.getChildren().add(notFoundLabel);
-//                } else {
-//                    // La liste de créatures est null
-//                    Label nullListLabel = new Label("La liste de créatures est null.");
-//                    actions.getChildren().add(nullListLabel);
-//                }
-//            }
-//        });
-//    }
     @FXML
     public void feedCreatures(ActionEvent actionEvent){
         actions.getChildren().removeAll(actions.getChildren());
-        for (AbstractCreature abstractCreature : this.enclosure.getCreatures()) {
+        for (AbstractCreature<?> abstractCreature : this.enclosure.getCreatures()) {
             abstractCreature.feed();
         }
         Label areFeededLabel = new Label("Les créatures ont été nourrits !");
@@ -193,13 +168,11 @@ public class EnclosureController implements Initializable {
             actions.getChildren().add(notFoundLabel);
         }
     }
-
     @FXML
     public void returnMenu(ActionEvent actionEvent){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
         try {
             Parent root = loader.load();
-            Controller controller = loader.getController();
             Scene currentScene = ((Node) actionEvent.getSource()).getScene();
             Scene newScene = new Scene(root, 800, 800);
             Stage stage = (Stage) currentScene.getWindow();
@@ -220,8 +193,6 @@ public class EnclosureController implements Initializable {
         enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
         enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
         enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
-        enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
-
 
         for(Node b : this.enclosure.getObservableCreatureMap().values()){
             if (b instanceof Button button) {
@@ -236,9 +207,6 @@ public class EnclosureController implements Initializable {
                     button.setOnAction(this::creatureButtonAction);
                     creaturesName.getChildren().add(button);
                 }
-            } else if (change.wasRemoved()) {
-                // Supprimer le bouton correspondant à chaque suppression dans la map
-                creaturesName.getChildren().remove(change.getValueRemoved());
             }
         });
     }

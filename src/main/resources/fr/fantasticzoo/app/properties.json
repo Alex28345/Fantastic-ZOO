@@ -3,5 +3,6 @@
   "sickProbability": 5,
   "sleepProbability": 5,
   "hungerProbability": 5,
-  "cleanProbability": 10
+  "cleanProbability": 10,
+  "ageOfDie": 50
 }

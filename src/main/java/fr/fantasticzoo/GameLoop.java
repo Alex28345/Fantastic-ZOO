@@ -1,6 +1,7 @@
 package fr.fantasticzoo;
 
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.creatures.propertiesInterfaces.Immortal;
 import fr.fantasticzoo.enclosures.Enclosure;
 
 import javax.json.JsonObject;
@@ -21,17 +22,35 @@ public class GameLoop{
             if(enclosure == null)
                 return;
             if (enclosure.getCreatureCount() > 0) {
-                for (AbstractCreature creature : enclosure.getCreatures()) {
+                for (AbstractCreature<?> creature : enclosure.getCreatures()) {
 
                         if (new Random().nextInt(100) < jsonParameters.getInt("sickProbability")) {
-                            creature.setSick(true);
-                            System.out.println(creature.getName() + " est malade");
+                            if(creature.isSick()) {
+                                System.out.println(creature.getName() + " est mort");
+                                creature.die();
+                                break;
+                            }
+                            else{
+                                creature.setSick(true);
+                                System.out.println(creature.getName() + " est malade");
+                            }
                         }
                         if (new Random().nextInt(100) < jsonParameters.getInt("sleepProbability")) {
-                            creature.setSleeping(true);
-                            System.out.println(creature.getName() + " dort");
+                            if(creature.isSleeping()) {
+                                creature.setSleeping(false);
+                                System.out.println(creature.getName() + " se reveille");
+                            }
+                            else {
+                                creature.setSleeping(true);
+                                System.out.println(creature.getName() + " dort");
+                            }
                         }
                         if (new Random().nextInt(100) < jsonParameters.getInt("hungerProbability")) {
+                            if(creature.isHungry()) {
+                                System.out.println(creature.getName() + " est mort");
+                                creature.die();
+                                break;
+                            }
                             creature.setHungry(true);
                             System.out.println(creature.getName() + " a faim");
                         }
@@ -39,13 +58,20 @@ public class GameLoop{
                 }
                 if (new Random().nextInt(100) < jsonParameters.getInt("cleanProbability")) {
                     enclosure.setCleanliness(false);
+                    System.out.println(enclosure.getName() + " est sale");
                 }
             }
         }
     }
     private void creaturesGrow(){
-        for (AbstractCreature creature : this.zoo.getCreatures()) {
-            creature.setAge(creature.getAge() + 1);
+        for (AbstractCreature<?> creature : this.zoo.getCreatures()) {
+            if(creature.getAge() < creature.getMaxAge())
+                creature.setAge(creature.getAge() + 1);
+            else if (creature instanceof Immortal){
+                ((Immortal) creature).resurrect();
+            }else {
+                creature.die();
+            }
         }
     }
 }

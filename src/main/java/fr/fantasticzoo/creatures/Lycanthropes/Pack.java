@@ -1,12 +1,10 @@
 package fr.fantasticzoo.creatures.Lycanthropes;
 
+import fr.fantasticzoo.creatures.Lycanthrope;
 import fr.fantasticzoo.enums.DominationRank;
 import fr.fantasticzoo.enums.Sex;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 import static java.lang.Math.round;
