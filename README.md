@@ -18,9 +18,7 @@ Vous devez vous rendre dans le package ***app***, ici, vous trouverez le fichier
 Pour naviguer dans l'application, vous devez simplement suivre votre instinct et découvrir toutes les fonctionnalités de cette dernière via l'interface graphique qui est mise à disposition pour vous faciliter votre navigation et votre compréhension du sujet.
 
 #### Index : 
-[Lien du sujet du projet]([http://www.exemple.com](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-projet.pdf
-))
-[Lien du TD "Java, cas pratique"]([http://www.exemple.com](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td3-java-cas-pratique.pdf
-))
-[Lien du TD "Algorithmique « avancée »"]([http://www.exemple.com](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td4-algorithmique-avancee.pdf)https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td4-algorithmique-avancee.pdf)
+[Lien du sujet du projet](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-projet.pdf)
+[Lien du TD "Java, cas pratique"](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td3-java-cas-pratique.pdf)
+[Lien du TD "Algorithmique « avancée »"](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td4-algorithmique-avancee.pdf)
 
