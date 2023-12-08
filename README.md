@@ -7,9 +7,12 @@ Cette application codée en langage *Java* a pour but de fournir l'implémentati
 #### Auteurs : 
 DIOP Sokhna ; LIETO Myke ; POSSENTI Alexandre
 
+#### Configuration de l'application : 
+Cette application a été développée sur le logiciel **IntelliJ IDEA** avec la version **UTF-8**, pour plus d'efficacité, nous vous conseillons de cloner ce projet avec les mêmes configurations que pendant son développement.
+Également, vous devez avoir préalablement installé le bon **Maven** ainsi que le même **JDK** avec elle a été développé.
+
 #### Lancement de l'application : 
 Vous devez vous rendre dans le package ***app***, ici, vous trouverez le fichier ***App.java***. C'est là que se trouve notre méthode ***start()*** ainsi que notre ***main()***, vous pourrez donc exécuter ce fichier pour commencer votre aventure en tant que Zoo Master !
 
-#### Configuration de l'application : 
-Cette application a été développé sur le logiciel **IntelliJ IDEA** avec la version **UTF-8**, pour plus d'efficacité, nous vous conseillons de cloner ce projet avec les mêmes configurations que pendant son développement.
-Également, vous devez avoir préalablement installé le bon **Maven** ainsi que le même **JDK** avec elle a été developpé.
+#### Navigation dans l'application : 
+Pour naviguer dans l'application, vous devez simplement suivre votre instinct et découvrir toutes les fonctionnalités de cette dernière via l'interface graphique qui est mise à disposition pour vous faciliter votre navigation et votre compréhension du sujet.
