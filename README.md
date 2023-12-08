@@ -6,4 +6,5 @@
 
 #### Auteurs : DIOP Sokhna ; LIETO Myke ; POSSENTI Alexandre
 
-### Lancement de l'application : Vous devez vous rendre dans le package "app", ici, vous trouverez le fichier "App.java"
+### Lancement de l'application : 
+Vous devez vous rendre dans le package "app", ici, vous trouverez le fichier "App.java"
