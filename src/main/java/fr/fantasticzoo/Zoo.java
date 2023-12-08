@@ -47,16 +47,6 @@ public class Zoo {
             observableEnclosureMap.put(enclosure, new Button(enclosure.getName()));
         }
     }
-
-    public int getCreatureCount() {
-        int creatureCount = 0;
-        for (Enclosure<?> enclosure : this.getEnclosures()) {
-            if (enclosure != null) {
-                creatureCount += enclosure.getCreatureCount();
-            }
-        }
-        return creatureCount;
-    }
     public ArrayList<AbstractCreature> getCreatures() {
         ArrayList<AbstractCreature> abstractCreatures = new ArrayList<AbstractCreature>();
         int i = 0;
@@ -80,5 +70,13 @@ public class Zoo {
 
     public ObservableMap<Enclosure<?>, Node> getObservableEnclosureMap() {
         return observableEnclosureMap;
+    }
+
+    public FantasticZooMaster getFantasticZooMaster() {
+        return fantasticZooMaster;
+    }
+
+    public void setFantasticZooMaster(FantasticZooMaster fantasticZooMaster) {
+        this.fantasticZooMaster = fantasticZooMaster;
     }
 }

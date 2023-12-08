@@ -1,5 +1,7 @@
 package fr.fantasticzoo;
 
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enums.Age;
 import fr.fantasticzoo.enums.Sex;
 
@@ -40,24 +42,14 @@ public class FantasticZooMaster {
         this.age = age;
     }
 
-    public String inspectEnclosure(/*Enclosure enclosure*/){
-        String display = "enclosure.display()";
-        return display;
+
+    public void feedCreatures(Enclosure<?> enclosure) {
+        for (AbstractCreature<?> abstractCreature : enclosure.getCreatures()) {
+            abstractCreature.feed();
+        }
     }
 
-    public void cleanEnclosure(/*Enclosure enclosure*/){
-        /*enclosure.clean();*/
-        isClean = true;
+    public void cleanEnclosure(Enclosure<?> enclosure) {
+        enclosure.clean();
     }
-
-    public void feedCreaturesInEnclosure(/*Enclosure enclosure*/){
-        /*enclosure.feedCreatures();*/
-        areFeeded = true;
-    }
-
-    public void transferCreatureBetweenEnclosures(/*Enclosure departureEnclosure, Creature creature, arrivalEnclosure*/){
-        /*arrivalEnclosure.addCreatures(creature);
-        * departureEnclosure.remove(creature);*/
-    }
-
 }

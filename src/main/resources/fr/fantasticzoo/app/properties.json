@@ -1,8 +1,8 @@
 {
-  "timeBetweenTurns": 5000,
-  "sickProbability": 5,
-  "sleepProbability": 5,
-  "hungerProbability": 5,
+  "timeBetweenTurns": 10000,
+  "sickProbability": 2,
+  "sleepProbability": 2,
+  "hungerProbability": 2,
   "cleanProbability": 10,
   "ageOfDie": 50
 }

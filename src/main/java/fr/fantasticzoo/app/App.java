@@ -4,7 +4,11 @@ import fr.fantasticzoo.FantasticZooMaster;
 import fr.fantasticzoo.Game;
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.Dragon;
+import fr.fantasticzoo.creatures.Megalodon;
 import fr.fantasticzoo.creatures.Nymph;
+import fr.fantasticzoo.creatures.Phoenix;
+import fr.fantasticzoo.enclosures.Aquarium;
+import fr.fantasticzoo.enclosures.Aviary;
 import fr.fantasticzoo.enclosures.StandardEnclosure;
 import fr.fantasticzoo.enums.Sex;
 import javafx.application.Application;
@@ -32,6 +36,18 @@ public class App extends Application {
         standardEnclosure1.addCreatures(createNymph("Barde"));
         standardEnclosure1.addCreatures(createNymph("Tieffelin"));
 
+        Aquarium<Megalodon> aquarium = new Aquarium<Megalodon>("Aquarium de Megalodons", 100, 10, 100);
+        aquarium.addCreatures(createMegalodon("Megalodon"));
+        aquarium.addCreatures(createMegalodon("Megalodon1"));
+        aquarium.addCreatures(createMegalodon("Megalodon2"));
+
+        Aviary<Phoenix> aviary = new Aviary<Phoenix>("Volière de Phoenix", 100, 10, 100);
+        aviary.addCreatures(createPhoenix("Phoenix"));
+        aviary.addCreatures(createPhoenix("Phoenix1"));
+        aviary.addCreatures(createPhoenix("Phoenix2"));
+
+        zoo.addEnclosure(aquarium);
+        zoo.addEnclosure(aviary);
         zoo.addEnclosure(standardEnclosure);
         zoo.addEnclosure(standardEnclosure1);
 
