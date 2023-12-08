@@ -8,7 +8,7 @@ Cette application codée en langage *Java* a pour but de fournir l'implémentati
 DIOP Sokhna ; LIETO Myke ; POSSENTI Alexandre
 
 #### Configuration de l'application : 
-Cette application a été développée sur le logiciel **IntelliJ IDEA** avec la version **UTF-8**, pour plus d'efficacité, nous vous conseillons de cloner ce projet avec les mêmes configurations que pendant son développement.
+Cette application a été développée sur le logiciel **IntelliJ IDEA**, pour plus d'efficacité, nous vous conseillons de cloner ce projet avec les mêmes configurations que pendant son développement.
 Également, vous devez avoir préalablement installé le bon **Maven** ainsi que le même **JDK** avec lesquelles elle a été développée.
 
 #### Lancement de l'application : 
