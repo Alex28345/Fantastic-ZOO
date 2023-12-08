@@ -68,12 +68,20 @@ public class FantasticZooMaster {
     }
 
 
+    /**
+     * Nourrit les créature dans l'enclos
+     * @param enclosure l'enclos actuel
+     */
     public void feedCreatures(Enclosure<?> enclosure) {
         for (AbstractCreature<?> abstractCreature : enclosure.getCreatures()) {
             abstractCreature.feed();
         }
     }
 
+    /**
+     * Nettoie l'enclos
+     * @param enclosure l'enclos actuel
+     */
     public void cleanEnclosure(Enclosure<?> enclosure) {
         enclosure.clean();
     }
