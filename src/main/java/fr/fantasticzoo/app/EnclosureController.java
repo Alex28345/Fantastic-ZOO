@@ -187,7 +187,7 @@ public class EnclosureController implements Initializable {
         try {
             Parent root = loader.load();
             Scene currentScene = ((Node) actionEvent.getSource()).getScene();
-            Scene newScene = new Scene(root, 800, 800);
+            Scene newScene = new Scene(root, 900, 800);
             Stage stage = (Stage) currentScene.getWindow();
             stage.setScene(newScene);
             stage.show();
