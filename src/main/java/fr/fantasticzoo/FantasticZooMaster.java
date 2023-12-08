@@ -1,5 +1,7 @@
 package fr.fantasticzoo;
 
+import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
+import fr.fantasticzoo.enclosures.Enclosure;
 import fr.fantasticzoo.enums.Age;
 import fr.fantasticzoo.enums.Sex;
 
@@ -65,37 +67,15 @@ public class FantasticZooMaster {
         this.age = age;
     }
 
-    /**
-     * Inspecter l'enlos
-     * @return Ce qu'il y'a dans l'enclos
-     */
-    public String inspectEnclosure(/*Enclosure enclosure*/){
-        String display = "enclosure.display()";
-        return display;
+
+    public void feedCreatures(Enclosure<?> enclosure) {
+        for (AbstractCreature<?> abstractCreature : enclosure.getCreatures()) {
+            abstractCreature.feed();
+        }
     }
 
-    /**
-     * Nettoie l'enclos
-     */
-    public void cleanEnclosure(/*Enclosure enclosure*/){
-        /*enclosure.clean();*/
-        isClean = true;
-    }
-
-    /**
-     * Nourrit les créatures dans l'enclos
-     */
-    public void feedCreaturesInEnclosure(/*Enclosure enclosure*/){
-        /*enclosure.feedCreatures();*/
-        areFeeded = true;
-    }
-
-    /**
-     * Transfert les créatures d'un enclos à l'autre
-     */
-    public void transferCreatureBetweenEnclosures(/*Enclosure departureEnclosure, Creature creature, arrivalEnclosure*/){
-        /*arrivalEnclosure.addCreatures(creature);
-        * departureEnclosure.remove(creature);*/
+    public void cleanEnclosure(Enclosure<?> enclosure) {
+        enclosure.clean();
     }
 
 }

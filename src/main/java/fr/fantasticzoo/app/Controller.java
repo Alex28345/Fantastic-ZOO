@@ -15,7 +15,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
@@ -25,10 +24,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     private Zoo zoo;
-    private final int i = 0;
-
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private ComboBox selectedCreature;
@@ -60,7 +55,7 @@ public class Controller implements Initializable {
 
         this.zoo = Zoo.getInstance();
 
-        for(Node b : zoo.getObservableEnclosureMap().values()){
+        for (Node b : zoo.getObservableEnclosureMap().values()) {
             if (b instanceof Button button) {
                 button.setOnAction(this::enclosureButtonAction);
                 enclosures.getChildren().add(button);
@@ -69,8 +64,8 @@ public class Controller implements Initializable {
         zoo.getObservableEnclosureMap().addListener((MapChangeListener<Enclosure<?>, Node>) change -> {
             if (change.wasAdded()) {
                 // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
-                if(change.getValueAdded() instanceof Button button){
-                        button.setOnAction(this::enclosureButtonAction);
+                if (change.getValueAdded() instanceof Button button) {
+                    button.setOnAction(this::enclosureButtonAction);
                     enclosures.getChildren().add(button);
                 }
             } else if (change.wasRemoved()) {

@@ -121,4 +121,12 @@ public class Zoo {
     public ObservableMap<Enclosure<?>, Node> getObservableEnclosureMap() {
         return observableEnclosureMap;
     }
+
+    public FantasticZooMaster getFantasticZooMaster() {
+        return fantasticZooMaster;
+    }
+
+    public void setFantasticZooMaster(FantasticZooMaster fantasticZooMaster) {
+        this.fantasticZooMaster = fantasticZooMaster;
+    }
 }

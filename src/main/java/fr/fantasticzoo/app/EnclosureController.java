@@ -3,7 +3,6 @@ package fr.fantasticzoo.app;
 import fr.fantasticzoo.Zoo;
 import fr.fantasticzoo.creatures.abstractClasses.AbstractCreature;
 import fr.fantasticzoo.enclosures.Enclosure;
-import fr.fantasticzoo.enclosures.StandardEnclosure;
 import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +24,6 @@ import java.util.ResourceBundle;
 public class EnclosureController implements Initializable {
     private Zoo zoo;
     private Enclosure<?> enclosure;
-    private Button newButton = new Button();
 
     //Informations de l'enclos FXML
     @FXML
@@ -35,13 +33,7 @@ public class EnclosureController implements Initializable {
     @FXML
     Label enclosureCreaturesMax;
     @FXML
-    Label enclosureCreaturesCount;
-    @FXML
     Label enclosureCleanliness;
-
-    @FXML
-    VBox creaturesInfo;
-
     @FXML
     VBox actions;
     @FXML
@@ -58,7 +50,6 @@ public class EnclosureController implements Initializable {
     Label hunger;
     @FXML
     Label sleep;
-
     @FXML
     VBox creaturesName;
     @FXML
@@ -125,7 +116,6 @@ public class EnclosureController implements Initializable {
 
 
         creatureInfo.getChildren().addAll(creatureLabel, age, gender, weight, height, health, hunger, feedButton, healButton, sleep);
-
     }
 
     /**
@@ -161,9 +151,9 @@ public class EnclosureController implements Initializable {
     @FXML
     public void feedCreatures(ActionEvent actionEvent){
         actions.getChildren().removeAll(actions.getChildren());
-        for (AbstractCreature<?> abstractCreature : this.enclosure.getCreatures()) {
-            abstractCreature.feed();
-        }
+        if (this.enclosure == null)
+            return;
+        this.zoo.getFantasticZooMaster().feedCreatures(this.enclosure);
         Label areFeededLabel = new Label("Les créatures ont été nourrits !");
         actions.getChildren().add(areFeededLabel);
     }
@@ -176,14 +166,12 @@ public class EnclosureController implements Initializable {
     public void cleanEnclosure(ActionEvent actionEvent){
 
         actions.getChildren().removeAll(actions.getChildren());
-        if (this.enclosure != null){
-            this.enclosure.clean();
-            this.enclosure.setCleanliness(true);
+        if (this.enclosure != null) {
+            this.zoo.getFantasticZooMaster().cleanEnclosure(this.enclosure);
             Label isCleanLabel = new Label("L'enclos a été nettoyé !");
             actions.getChildren().add(isCleanLabel);
-        }
 
-        else {
+        } else {
             Label notFoundLabel = new Label("L'enclos n'a pas été trouvé !");
             actions.getChildren().add(notFoundLabel);
         }
@@ -216,7 +204,6 @@ public class EnclosureController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.zoo = Zoo.getInstance();
-
         enclosureName.setText(this.enclosure.getName());
 
         //informations de l'enclos
