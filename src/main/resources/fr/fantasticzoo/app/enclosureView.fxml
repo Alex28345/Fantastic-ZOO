@@ -40,8 +40,11 @@
     <center>
         <VBox fx:id="creatureInfo" spacing="20" alignment="CENTER">
             <Label fx:id="creatureLabel" text="Informations sur une créature"/>
-            <VBox fx:id="creaturesInfo" alignment="CENTER">
-            </VBox>
+            <Label fx:id="age"/>
+            <Label fx:id="gender"/>
+            <Label fx:id="weight"/>
+            <Label fx:id="height"/>
+            <Label fx:id="health"/>
             <VBox fx:id="actions" alignment="CENTER">
             </VBox>
         </VBox>

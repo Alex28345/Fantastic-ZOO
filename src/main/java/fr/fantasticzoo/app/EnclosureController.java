@@ -55,14 +55,16 @@ public class EnclosureController implements Initializable {
 
     @FXML
     VBox actions;
-
-    private Label label = new Label("");
-
-    private Label age = new Label("Age : ");
-    private Label gender = new Label("Sexe : ");
-    private Label weight = new Label("Poids : ");
-    private Label height = new Label("Hauteur : ");
-    private Label health = new Label("Etat de santé : ");
+    @FXML
+    Label age;
+    @FXML
+    Label gender;
+    @FXML
+    Label weight;
+    @FXML
+    Label height;
+    @FXML
+    Label health;
 
     @FXML
     VBox creaturesName;
@@ -73,41 +75,6 @@ public class EnclosureController implements Initializable {
 
     public EnclosureController(Enclosure<?> enclosureWithButton) {
         this.enclosure = enclosureWithButton;
-    }
-
-    public void setData(Enclosure<?> buttonStandardEnclosure) {
-        this.enclosure = buttonStandardEnclosure;
-        label.setText(this.enclosure.getName());
-        this.zoo = Zoo.getInstance();
-
-        enclosureName.setText(label.getText());
-        System.out.println(this.enclosure);
-
-        //informations de l'enclos
-        enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
-        enclosureCreaturesMax.setText(enclosureCreaturesMax.getText() + String.valueOf(enclosure.getCapacity()));
-        enclosureCleanliness.setText(enclosureCleanliness.getText() + enclosure.getCleanlinessToString());
-        enclosureCreaturesCount.setText(enclosureCreaturesCount.getText() + String.valueOf(enclosure.getCreatureCount()));
-
-
-        for(Node b : this.enclosure.getObservableCreatureMap().values()){
-            if (b instanceof Button button) {
-                button.setOnAction(this::creatureButtonAction);
-                creaturesName.getChildren().add(button);
-            }
-        }
-        this.enclosure.getObservableCreatureMap().addListener((MapChangeListener<AbstractCreature, Node>) change -> {
-            if (change.wasAdded()) {
-                // Ajouter un nouveau bouton à la HBox pour chaque ajout dans la map
-                if (change.getValueAdded() instanceof Button button) {
-                    button.setOnAction(this::creatureButtonAction);
-                    creaturesName.getChildren().add(button);
-                }
-            } else if (change.wasRemoved()) {
-                // Supprimer le bouton correspondant à chaque suppression dans la map
-                creaturesName.getChildren().remove(change.getValueRemoved());
-            }
-        });
     }
 
     private void creatureButtonAction(ActionEvent actionEvent) {
@@ -141,31 +108,12 @@ public class EnclosureController implements Initializable {
         //zone infos de la créature à ajouter
         Label nameLabelAdd = new Label("Entrez le nom d'une Créature à ajouter");
         TextField NameTextFieldAdd = new TextField();
-
-        Label ageLabelAdd = new Label("Choissiez l'age de la créature à ajouter");
-        ObservableList<Age> ageList = FXCollections.observableArrayList(Age.values());
-        ComboBox ageChoicBox = new ComboBox(ageList);
-
-        Label genderLabelAdd = new Label("Choissiez le sexe de la créature à ajouter");
-        ObservableList<Sex> genderList = FXCollections.observableArrayList(Sex.values());
-        ComboBox genderChoicBox = new ComboBox(genderList);
-
-        Label weightLabelAdd = new Label("Choissiez le poids de la créature à ajouter");
-        TextField weightTextFieldAdd = new TextField();
-
-        Label heightLabelAdd = new Label("Choissiez la hauteur de la créature à ajouter");
-        TextField heightTextFieldAdd = new TextField();
-
-        Label healthLabelAdd = new Label("Choissiez la santé de la créature à ajouter");
-        ObservableList<String> healthList = FXCollections.observableArrayList("Mauvais", "Bon");
-        ComboBox healthChoicBox = new ComboBox(healthList);
         //
 
         Button addButton = new Button("Ajouter la créature");
         addButton.setDisable(false);
 
-        actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, ageLabelAdd, ageChoicBox, genderLabelAdd,
-        genderChoicBox, weightLabelAdd, weightTextFieldAdd, heightLabelAdd, heightTextFieldAdd, healthLabelAdd, healthChoicBox, addButton);
+        actions.getChildren().addAll(nameLabelAdd, NameTextFieldAdd, addButton);
 
         creatureInfo.getChildren().add(actions);
 
@@ -176,19 +124,9 @@ public class EnclosureController implements Initializable {
         //
         addButton.setOnAction(event ->{
             String creatureName = NameTextFieldAdd.getText(); //On récupère le nom de la r=créature dans le textField
-            String creatureAge = ageChoicBox.getValue().toString();
-            String creatureGender = genderChoicBox.getValue().toString();
-            String creatureWeight = weightTextFieldAdd.getText();
-            String creatureHeight = heightTextFieldAdd.getText();
-            String creatureHealth = healthChoicBox.getValue().toString();
 
             Label creatureNameLabel = new Label(creatureName);
-            Label creatureageAgeLabel = new Label(creatureAge);
-            Label creatureageGenderLabel = new Label(creatureGender);
-            Label creatureWeightLabel = new Label(creatureWeight);
-            Label creatureHeightLabel = new Label(creatureHeight);
-            Label creatureHealthLabel = new Label(creatureHealth);
-
+            //this.enclosure.addCreatures(this.getClass().getResource());
             //gridPane.addRow(gridPane.getRowCount(), creatureNameLabel, creatureageAgeLabel, creatureageGenderLabel, creatureWeightLabel, creatureHeightLabel, creatureHealthLabel);
         });
     }
@@ -243,7 +181,6 @@ public class EnclosureController implements Initializable {
     public void cleanEnclosure(ActionEvent actionEvent){
 
         actions.getChildren().removeAll(actions.getChildren());
-
         if (this.enclosure != null){
             this.enclosure.clean();
             this.enclosure.setCleanliness(true);
@@ -277,7 +214,7 @@ public class EnclosureController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.zoo = Zoo.getInstance();
 
-        enclosureName.setText(label.getText());
+        enclosureName.setText(this.enclosure.getName());
 
         //informations de l'enclos
         enclosureSurface.setText(enclosureSurface.getText() + String.valueOf(enclosure.getSurface()) + "m²");
