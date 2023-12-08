@@ -19,6 +19,10 @@ Pour naviguer dans l'application, vous devez simplement suivre votre instinct et
 
 #### Index : 
 [Lien du sujet du projet](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-projet.pdf)
+
+
 [Lien du TD "Java, cas pratique"](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td3-java-cas-pratique.pdf)
+
+
 [Lien du TD "Algorithmique « avancée »"](https://mickael-martin-nevot.com/univ-amu/iut/but-informatique/qualite-de-developpement/s45-td4-algorithmique-avancee.pdf)
 
