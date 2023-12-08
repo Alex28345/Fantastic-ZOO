@@ -8,4 +8,4 @@ Cette application codé en langage *Java* a pour but de fournir l'implémentatio
 DIOP Sokhna ; LIETO Myke ; POSSENTI Alexandre
 
 #### Lancement de l'application : 
-Vous devez vous rendre dans le package ***app***, ici, vous trouverez le fichier ***App.java***. C'est ici que se trouve notre méthode ***start()*** ansi que notre ***main()***, vous pourrez donc executer ce fichier pour commencer votre aventure en tant que Zoo Master !
+Vous devez vous rendre dans le package ***app***, ici, vous trouverez le fichier ***App.java***. C'est là que se trouve notre méthode ***start()*** ansi que notre ***main()***, vous pourrez donc executer ce fichier pour commencer votre aventure en tant que Zoo Master !
